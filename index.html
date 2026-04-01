@@ -99,6 +99,142 @@
         .nav-links a:hover {
             color: #6c7eff;
         }
+        
+        /* Кнопка входа */
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-login {
+            background: transparent;
+            border: 1px solid #3b4bff;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .btn-login:hover {
+            background: #3b4bff;
+            box-shadow: 0 0 12px rgba(59, 75, 255, 0.5);
+        }
+        .btn-register {
+            background: #3b4bff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .btn-register:hover {
+            background: #5f6eff;
+            transform: translateY(-2px);
+        }
+        
+        /* Кнопка выхода и профиль */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-name {
+            color: #6c7eff;
+            font-weight: 600;
+        }
+        .btn-logout {
+            background: rgba(255, 59, 59, 0.2);
+            border: 1px solid #ff3b3b;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: #ff6b6b;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .btn-logout:hover {
+            background: #ff3b3b;
+            color: white;
+        }
+        
+        /* Модальное окно входа */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: linear-gradient(145deg, #0e1120, #070914);
+            border-radius: 32px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid #2a2f4e;
+            position: relative;
+        }
+        .modal-content h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            background: #1b1f32;
+            border: 1px solid #2f3557;
+            border-radius: 40px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+        .modal-content input:focus {
+            border-color: #3b4bff;
+        }
+        .modal-content button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+            transition: 0.2s;
+        }
+        .close-modal:hover {
+            color: #fff;
+        }
+        .switch-auth {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .switch-auth span {
+            color: #6c7eff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 15px;
+            display: none;
+        }
+
         .btn-outline {
             border: 1px solid #3b4bff;
             background: transparent;
@@ -353,6 +489,9 @@
             section {
                 padding: 60px 0;
             }
+            .auth-buttons {
+                margin-top: 10px;
+            }
         }
         button {
             font-family: 'Inter', sans-serif;
@@ -372,9 +511,32 @@
             <li><a href="#calculator">Калькулятор</a></li>
             <li><a href="#reviews">Отзывы</a></li>
         </ul>
-        <button class="btn-outline" id="contactBtn">Связаться</button>
+        <div class="auth-buttons" id="authButtons">
+            <button class="btn-login" id="loginBtn">Вход</button>
+            <button class="btn-register" id="registerBtn">Регистрация</button>
+        </div>
+        <div class="user-profile" id="userProfile" style="display: none;">
+            <i class="fas fa-user-circle" style="font-size: 24px; color: #6c7eff;"></i>
+            <span class="user-name" id="userName">Пользователь</span>
+            <button class="btn-logout" id="logoutBtn">Выйти</button>
+        </div>
     </div>
 </header>
+
+<!-- Модальное окно входа/регистрации -->
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="modalTitle">Вход в аккаунт</h2>
+        <div id="errorMsg" class="error-msg"></div>
+        <input type="text" id="loginEmail" placeholder="Email" autocomplete="email">
+        <input type="password" id="loginPassword" placeholder="Пароль" autocomplete="current-password">
+        <button class="btn-primary" id="submitAuthBtn">Войти</button>
+        <div class="switch-auth">
+            Нет аккаунта? <span id="switchToRegister">Зарегистрироваться</span>
+        </div>
+    </div>
+</div>
 
 <main>
     <section id="home">
@@ -476,6 +638,7 @@
 </footer>
 
 <script>
+    // ========== КАЛЬКУЛЯТОР ==========
     const weightInput = document.getElementById('weight');
     const distanceInput = document.getElementById('distance');
     const prioritySelect = document.getElementById('priority');
@@ -511,13 +674,176 @@
     document.getElementById('orderBtn')?.addEventListener('click', () => {
         alert('📦 Спасибо! Оператор свяжется с вами.');
     });
-    document.getElementById('contactBtn')?.addEventListener('click', () => {
-        alert('📞 +7 (495) 123-45-67');
-    });
 
     weightInput.addEventListener('input', calculatePrice);
     distanceInput.addEventListener('input', calculatePrice);
     prioritySelect.addEventListener('change', calculatePrice);
+
+    // ========== СИСТЕМА АВТОРИЗАЦИИ ==========
+    // Ключи для localStorage
+    const STORAGE_KEY = 'fpvlogistx_users';
+    const CURRENT_USER_KEY = 'fpvlogistx_current_user';
+
+    // Инициализация: создаем тестового пользователя, если нет
+    function initUsers() {
+        let users = localStorage.getItem(STORAGE_KEY);
+        if (!users) {
+            const defaultUsers = [
+                { email: 'demo@fpvlogistx.ru', password: 'demo123', name: 'Демо Пользователь' },
+                { email: 'test@test.ru', password: '123456', name: 'Тестовый Аккаунт' }
+            ];
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultUsers));
+        }
+    }
+
+    // Проверка авторизации при загрузке
+    function checkAuth() {
+        const currentUser = localStorage.getItem(CURRENT_USER_KEY);
+        const authButtons = document.getElementById('authButtons');
+        const userProfile = document.getElementById('userProfile');
+        const userNameSpan = document.getElementById('userName');
+
+        if (currentUser) {
+            const user = JSON.parse(currentUser);
+            authButtons.style.display = 'none';
+            userProfile.style.display = 'flex';
+            userNameSpan.textContent = user.name || user.email.split('@')[0];
+        } else {
+            authButtons.style.display = 'flex';
+            userProfile.style.display = 'none';
+        }
+    }
+
+    // Выход из аккаунта
+    function logout() {
+        localStorage.removeItem(CURRENT_USER_KEY);
+        checkAuth();
+        alert('Вы вышли из аккаунта');
+    }
+
+    // Вход в аккаунт
+    function login(email, password) {
+        const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        const user = users.find(u => u.email === email && u.password === password);
+        
+        if (user) {
+            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+            checkAuth();
+            closeModal();
+            alert(`Добро пожаловать, ${user.name || user.email}!`);
+            return true;
+        } else {
+            showError('Неверный email или пароль');
+            return false;
+        }
+    }
+
+    // Регистрация
+    function register(email, password, name) {
+        const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        
+        // Проверка существующего пользователя
+        if (users.find(u => u.email === email)) {
+            showError('Пользователь с таким email уже существует');
+            return false;
+        }
+        
+        // Создаем нового пользователя
+        const newUser = { email, password, name: name || email.split('@')[0] };
+        users.push(newUser);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+        
+        // Автоматически входим
+        localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(newUser));
+        checkAuth();
+        closeModal();
+        alert(`Регистрация успешна! Добро пожаловать, ${newUser.name}!`);
+        return true;
+    }
+
+    // Показать ошибку
+    function showError(msg) {
+        const errorDiv = document.getElementById('errorMsg');
+        errorDiv.textContent = msg;
+        errorDiv.style.display = 'block';
+        setTimeout(() => {
+            errorDiv.style.display = 'none';
+        }, 3000);
+    }
+
+    // Модальное окно
+    const modal = document.getElementById('authModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const submitBtn = document.getElementById('submitAuthBtn');
+    const switchLink = document.getElementById('switchToRegister');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPassword = document.getElementById('loginPassword');
+    
+    let isLoginMode = true;
+    
+    function openModal(mode = 'login') {
+        isLoginMode = mode === 'login';
+        modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
+        submitBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+        switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
+        loginEmail.value = '';
+        loginPassword.value = '';
+        document.getElementById('errorMsg').style.display = 'none';
+        modal.style.display = 'flex';
+    }
+    
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+    
+    function handleAuth() {
+        const email = loginEmail.value.trim();
+        const password = loginPassword.value.trim();
+        
+        if (!email || !password) {
+            showError('Заполните все поля');
+            return;
+        }
+        
+        if (isLoginMode) {
+            login(email, password);
+        } else {
+            register(email, password, '');
+        }
+    }
+    
+    // Навешиваем обработчики
+    document.getElementById('loginBtn').addEventListener('click', () => openModal('login'));
+    document.getElementById('registerBtn').addEventListener('click', () => openModal('register'));
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+    document.querySelector('.close-modal').addEventListener('click', closeModal);
+    submitBtn.addEventListener('click', handleAuth);
+    switchLink.addEventListener('click', () => {
+        isLoginMode = !isLoginMode;
+        modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
+        submitBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+        switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
+        document.getElementById('errorMsg').style.display = 'none';
+        loginEmail.value = '';
+        loginPassword.value = '';
+    });
+    
+    // Закрытие по клику вне окна
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    // Enter для отправки
+    loginEmail.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') loginPassword.focus();
+    });
+    loginPassword.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleAuth();
+    });
+    
+    // Инициализация
+    initUsers();
+    checkAuth();
 </script>
 </body>
 </html>
