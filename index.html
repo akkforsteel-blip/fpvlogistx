@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPVlogistX | Доставка FPV-дронами</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>SkySliceLogistX | Доставка FPV-дронами</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -13,12 +13,16 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 140px;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0a0c12;
             color: #eef2ff;
             line-height: 1.5;
-            scroll-behavior: smooth;
             overflow-x: hidden;
         }
 
@@ -60,30 +64,176 @@
         }
 
         header {
-            padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            background: rgba(10, 12, 18, 0.95);
             backdrop-filter: blur(12px);
-            background: rgba(10, 12, 18, 0.75);
             border-bottom: 1px solid rgba(59, 75, 255, 0.2);
         }
-        .nav {
+
+        .top-bar {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(59, 75, 255, 0.15);
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            padding: 4px;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: #99a4d4;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .lang-btn.active {
+            background: #3b4bff;
+            color: white;
+        }
+        .lang-btn:hover:not(.active) {
+            color: white;
+        }
+
+        .search-wrapper {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .search-form {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            padding: 8px 18px;
+            border: 1px solid rgba(59, 75, 255, 0.3);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .search-form:hover, .search-form:focus-within {
+            border-color: #3b4bff;
+            background: rgba(59, 75, 255, 0.1);
+        }
+        .search-form i {
+            color: #6c7eff;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        .search-form input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        .search-form input::placeholder {
+            color: #4a4a6a;
+        }
+
+        .auth-buttons-header {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-login-header {
+            background: transparent;
+            border: 1px solid #3b4bff;
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .btn-login-header:hover {
+            background: #3b4bff;
+            box-shadow: 0 0 12px rgba(59, 75, 255, 0.5);
+        }
+        .btn-register-header {
+            background: #3b4bff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .btn-register-header:hover {
+            background: #5f6eff;
+            transform: translateY(-2px);
+        }
+
+        .user-profile-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(59, 75, 255, 0.15);
+            padding: 5px 15px;
+            border-radius: 40px;
+        }
+        .user-profile-header i {
+            font-size: 1.1rem;
+            color: #6c7eff;
+        }
+        .user-name-header {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .logout-header {
+            background: transparent;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+        .logout-header:hover {
+            background: rgba(255, 59, 59, 0.2);
+        }
+
+        .main-nav {
+            padding: 20px 0;
+        }
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 20px;
         }
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
             background: linear-gradient(135deg, #FFFFFF, #6c7eff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.5px;
         }
         .logo span {
             color: #3b4bff;
+            background: none;
         }
         .nav-links {
             display: flex;
@@ -95,71 +245,333 @@
             color: #ccd6f6;
             font-weight: 500;
             transition: 0.2s;
+            font-size: 1rem;
+            cursor: pointer;
         }
         .nav-links a:hover {
             color: #6c7eff;
         }
-        
-        /* Кнопка входа */
-        .auth-buttons {
+
+        section {
+            padding: 60px 0;
+            min-height: 100vh;
             display: flex;
-            gap: 12px;
+            align-items: center;
         }
-        .btn-login {
-            background: transparent;
+        #home {
+            padding-top: 20px;
+        }
+        .section-container {
+            width: 100%;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .section-sub {
+            text-align: center;
+            color: #99a4d4;
+            max-width: 700px;
+            margin: 0 auto 60px auto;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 40px;
+            margin-top: -60px;
+        }
+        .hero-content {
+            text-align: center;
+        }
+        .hero-badge {
+            background: rgba(59, 75, 255, 0.2);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            background: linear-gradient(to right, #ffffff, #b1bcff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #b9c3e6;
+            max-width: 600px;
+            margin: 0 auto 28px auto;
+        }
+        .btn-group {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: #3b4bff;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(59, 75, 255, 0.3);
+        }
+        .btn-primary:hover {
+            background: #5f6eff;
+            transform: translateY(-3px);
+        }
+        .btn-outline {
             border: 1px solid #3b4bff;
-            padding: 8px 20px;
+            background: transparent;
+            padding: 12px 28px;
             border-radius: 40px;
             color: white;
             font-weight: 600;
-            cursor: pointer;
             transition: 0.25s;
+            cursor: pointer;
         }
-        .btn-login:hover {
+        .btn-outline:hover {
             background: #3b4bff;
             box-shadow: 0 0 12px rgba(59, 75, 255, 0.5);
         }
-        .btn-register {
-            background: #3b4bff;
-            border: none;
-            padding: 8px 20px;
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+        .drone-card {
+            background: rgba(18, 22, 40, 0.6);
+            backdrop-filter: blur(8px);
             border-radius: 40px;
-            color: white;
+            padding: 20px 30px;
+            border: 1px solid rgba(59, 75, 255, 0.5);
+            text-align: center;
+            width: 280px;
+            animation: float 5s infinite ease-in-out;
+        }
+        .drone-card i {
+            font-size: 5rem;
+            color: #6c7eff;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        .feature-card {
+            background: rgba(22, 26, 45, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 32px;
+            padding: 32px 24px;
+            transition: 0.3s;
+            border: 1px solid rgba(59, 75, 255, 0.2);
+            text-align: center;
+        }
+        .feature-card:hover {
+            border-color: #3b4bff;
+            transform: translateY(-8px);
+        }
+        .feature-icon {
+            font-size: 2.8rem;
+            color: #6c7eff;
+            margin-bottom: 24px;
+        }
+        .feature-card h3 {
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+        }
+
+        .zone-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .zone-item {
+            background: #11141f;
+            border-radius: 60px;
+            padding: 12px 28px;
             font-weight: 600;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-        .btn-register:hover {
-            background: #5f6eff;
-            transform: translateY(-2px);
-        }
-        
-        /* Кнопка выхода и профиль */
-        .user-profile {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
+            border: 1px solid #2c3250;
         }
-        .user-name {
+        .zone-item i {
+            color: #3b4bff;
+        }
+
+        /* НОВЫЙ КАЛЬКУЛЯТОР */
+        .calculator {
+            background: linear-gradient(145deg, #0e1120, #070914);
+            border-radius: 48px;
+            padding: 40px;
+            border: 1px solid #2a2f4e;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #ccd6f6;
+        }
+        .form-group label i {
             color: #6c7eff;
-            font-weight: 600;
+            margin-right: 8px;
         }
-        .btn-logout {
-            background: rgba(255, 59, 59, 0.2);
-            border: 1px solid #ff3b3b;
-            padding: 8px 16px;
+        input, select {
+            width: 100%;
+            padding: 14px 20px;
+            background: #1b1f32;
+            border: 1px solid #2f3557;
             border-radius: 40px;
-            color: #ff6b6b;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-        .btn-logout:hover {
-            background: #ff3b3b;
             color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
         }
-        
-        /* Модальное окно входа */
+        input:focus, select:focus {
+            border-color: #3b4bff;
+        }
+        .price-details {
+            margin-top: 30px;
+            background: rgba(27, 31, 50, 0.6);
+            border-radius: 32px;
+            padding: 25px;
+        }
+        .price-breakdown {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(59, 75, 255, 0.2);
+        }
+        .breakdown-item {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+        .breakdown-label {
+            font-size: 0.75rem;
+            color: #99a4d4;
+            margin-bottom: 5px;
+        }
+        .breakdown-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c7eff;
+        }
+        .price-total {
+            text-align: center;
+            padding: 15px;
+            background: rgba(59, 75, 255, 0.1);
+            border-radius: 40px;
+        }
+        .price-total span:first-child {
+            font-size: 1rem;
+            color: #99a4d4;
+        }
+        .price-total span:last-child {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #6c7eff;
+            margin-left: 15px;
+        }
+        .info-note {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(59, 75, 255, 0.05);
+            border-radius: 24px;
+            font-size: 0.75rem;
+            color: #99a4d4;
+            text-align: center;
+        }
+        .info-note i {
+            margin-right: 8px;
+            color: #6c7eff;
+        }
+
+        .reviews {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .review-card {
+            background: rgba(20, 24, 42, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 32px;
+            padding: 30px;
+            max-width: 350px;
+            border: 1px solid #2d3255;
+            text-align: center;
+        }
+        .stars {
+            color: #ffb83b;
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+        .review-card p {
+            margin-bottom: 16px;
+            color: #ccd6f6;
+        }
+        .review-card h4 {
+            color: #6c7eff;
+        }
+
+        footer {
+            border-top: 1px solid #1f233e;
+            padding: 48px 0 24px;
+            background: #07090f;
+            text-align: center;
+        }
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        .footer-grid .logo {
+            font-size: 1.6rem;
+        }
+        footer p {
+            text-align: center;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -167,7 +579,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -235,262 +647,140 @@
             display: none;
         }
 
-        .btn-outline {
-            border: 1px solid #3b4bff;
-            background: transparent;
-            padding: 8px 20px;
-            border-radius: 40px;
-            color: white;
-            font-weight: 600;
-            transition: 0.25s;
-            cursor: pointer;
-        }
-        .btn-outline:hover {
-            background: #3b4bff;
-            box-shadow: 0 0 12px rgba(59, 75, 255, 0.5);
-        }
-
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 85vh;
-            gap: 40px;
-            padding: 40px 0;
-        }
-        .hero-content {
-            flex: 1;
-        }
-        .hero-badge {
-            background: rgba(59, 75, 255, 0.2);
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            margin-bottom: 24px;
-        }
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #ffffff, #b1bcff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .hero-content p {
-            font-size: 1.2rem;
-            color: #b9c3e6;
-            max-width: 550px;
-            margin-bottom: 32px;
-        }
-        .btn-group {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-        .btn-primary {
-            background: #3b4bff;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-weight: 700;
-            border: none;
-            color: white;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 8px 20px rgba(59, 75, 255, 0.3);
-        }
-        .btn-primary:hover {
-            background: #5f6eff;
-            transform: translateY(-3px);
-        }
-        .hero-visual {
-            flex: 1;
-            display: flex;
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1001;
             justify-content: center;
+            align-items: flex-start;
+            padding-top: 100px;
         }
-        .drone-card {
-            background: rgba(18, 22, 40, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 40px;
-            padding: 20px 30px;
-            border: 1px solid rgba(59, 75, 255, 0.5);
-            text-align: center;
-            width: 280px;
-            animation: float 5s infinite ease-in-out;
+        .search-modal.active {
+            display: flex;
         }
-        .drone-card i {
-            font-size: 5rem;
-            color: #6c7eff;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        section {
-            padding: 100px 0;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        .section-sub {
-            text-align: center;
-            color: #99a4d4;
+        .search-modal-content {
+            width: 90%;
             max-width: 700px;
-            margin: 0 auto 60px auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-        .feature-card {
-            background: rgba(22, 26, 45, 0.6);
-            backdrop-filter: blur(4px);
-            border-radius: 32px;
-            padding: 32px 24px;
-            transition: 0.3s;
-            border: 1px solid rgba(59, 75, 255, 0.2);
-            text-align: center;
-        }
-        .feature-card:hover {
-            border-color: #3b4bff;
-            transform: translateY(-8px);
-        }
-        .feature-icon {
-            font-size: 2.8rem;
-            color: #6c7eff;
-            margin-bottom: 24px;
-        }
-        .feature-card h3 {
-            margin-bottom: 16px;
-            font-size: 1.5rem;
-        }
-
-        .zone-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .zone-item {
-            background: #11141f;
-            border-radius: 60px;
-            padding: 12px 28px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border: 1px solid #2c3250;
-        }
-        .zone-item i {
-            color: #3b4bff;
-        }
-
-        .calculator {
             background: linear-gradient(145deg, #0e1120, #070914);
             border-radius: 48px;
-            padding: 40px;
             border: 1px solid #2a2f4e;
-            max-width: 800px;
-            margin: 0 auto;
+            overflow: hidden;
         }
-        .form-group {
-            margin-bottom: 24px;
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid #2a2f4e;
         }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        input, select {
-            width: 100%;
-            padding: 14px 20px;
-            background: #1b1f32;
-            border: 1px solid #2f3557;
-            border-radius: 40px;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-        }
-        input:focus, select:focus {
-            border-color: #3b4bff;
-        }
-        .price-result {
-            margin-top: 30px;
-            background: #0101126b;
-            border-radius: 40px;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        .price-result span {
+        .search-input-wrapper i {
+            font-size: 1.3rem;
             color: #6c7eff;
-            font-size: 2rem;
+            margin-right: 15px;
         }
-
-        .reviews {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-        }
-        .review-card {
-            background: rgba(20, 24, 42, 0.7);
-            backdrop-filter: blur(4px);
-            border-radius: 32px;
-            padding: 30px;
-            max-width: 350px;
-            border: 1px solid #2d3255;
-        }
-        .stars {
-            color: #ffb83b;
-            margin-bottom: 16px;
+        .search-input-wrapper input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
             font-size: 1.2rem;
+            outline: none;
+            font-family: 'Inter', sans-serif;
         }
-
-        footer {
-            border-top: 1px solid #1f233e;
-            padding: 48px 0 24px;
-            background: #07090f;
+        .close-search {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0 10px;
         }
-        .footer-grid {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 40px;
+        .close-search:hover {
+            color: white;
+        }
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+        .search-result-item {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: 0.2s;
+            border-bottom: 1px solid rgba(42, 47, 78, 0.5);
+        }
+        .search-result-item:hover {
+            background: rgba(59, 75, 255, 0.15);
+        }
+        .search-result-title {
+            font-weight: 600;
+            color: #6c7eff;
+            margin-bottom: 5px;
+        }
+        .search-result-desc {
+            font-size: 0.85rem;
+            color: #99a4d4;
+        }
+        .no-results {
+            padding: 30px;
+            text-align: center;
+            color: #888;
+        }
+        .highlight {
+            background-color: rgba(59, 75, 255, 0.4);
+            border-radius: 4px;
+            padding: 0 2px;
         }
 
         @media (max-width: 900px) {
+            html {
+                scroll-padding-top: 200px;
+            }
             .hero {
-                flex-direction: column;
-                text-align: center;
+                margin-top: -20px;
             }
             .hero-content h1 {
                 font-size: 2.5rem;
             }
-            .nav {
+            .nav-container {
                 flex-direction: column;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
                 gap: 20px;
             }
             .container {
                 padding: 0 20px;
             }
             section {
-                padding: 60px 0;
+                padding: 40px 0;
             }
-            .auth-buttons {
-                margin-top: 10px;
+            .top-bar .container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .search-wrapper {
+                order: 3;
+                width: 100%;
+                max-width: none;
+            }
+            .logo {
+                font-size: 1.6rem;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .price-breakdown {
+                flex-direction: column;
+            }
+            .price-total span:last-child {
+                font-size: 1.6rem;
             }
         }
         button {
@@ -502,35 +792,73 @@
 <div class="bg-glow"></div>
 
 <header>
-    <div class="container nav">
-        <div class="logo">FPV<span>logistX</span></div>
-        <ul class="nav-links">
-            <li><a href="#home">Главная</a></li>
-            <li><a href="#features">Преимущества</a></li>
-            <li><a href="#delivery">Зоны</a></li>
-            <li><a href="#calculator">Калькулятор</a></li>
-            <li><a href="#reviews">Отзывы</a></li>
-        </ul>
-        <div class="auth-buttons" id="authButtons">
-            <button class="btn-login" id="loginBtn">Вход</button>
-            <button class="btn-register" id="registerBtn">Регистрация</button>
+    <div class="top-bar">
+        <div class="container">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ru">RU</button>
+                <button class="lang-btn" data-lang="en">ENG</button>
+            </div>
+            <div class="search-wrapper">
+                <div class="search-form" id="searchFormClick">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="topSearchInput" placeholder="Поиск по сайту" readonly>
+                </div>
+            </div>
+            <div id="headerAuthBlock">
+                <div class="auth-buttons-header">
+                    <button class="btn-login-header" id="headerLoginBtn">Вход</button>
+                    <button class="btn-register-header" id="headerRegisterBtn">Регистрация</button>
+                </div>
+            </div>
+            <div id="headerUserBlock" style="display: none;">
+                <div class="user-profile-header">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="user-name-header" id="headerUserName">Пользователь</span>
+                    <button class="logout-header" id="headerLogoutBtn">Выйти</button>
+                </div>
+            </div>
         </div>
-        <div class="user-profile" id="userProfile" style="display: none;">
-            <i class="fas fa-user-circle" style="font-size: 24px; color: #6c7eff;"></i>
-            <span class="user-name" id="userName">Пользователь</span>
-            <button class="btn-logout" id="logoutBtn">Выйти</button>
+    </div>
+
+    <div class="main-nav">
+        <div class="container nav-container">
+            <div class="logo">SkySlice<span>LogistX</span></div>
+            <ul class="nav-links">
+                <li><a href="#home" data-nav="Главная">Главная</a></li>
+                <li><a href="#features" data-nav="Преимущества">Преимущества</a></li>
+                <li><a href="#delivery" data-nav="Зоны">Зоны</a></li>
+                <li><a href="#calculator" data-nav="Калькулятор">Калькулятор</a></li>
+                <li><a href="#reviews" data-nav="Отзывы">Отзывы</a></li>
+            </ul>
         </div>
     </div>
 </header>
 
-<!-- Модальное окно входа/регистрации -->
+<div id="searchModal" class="search-modal">
+    <div class="search-modal-content">
+        <div class="search-input-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Поиск по сайту...">
+            <button class="close-search" id="closeSearchBtn">&times;</button>
+        </div>
+        <div id="searchResults" class="search-results">
+            <div class="no-results"><i class="fas fa-search"></i> Начните вводить текст</div>
+        </div>
+        <div style="padding: 10px 20px; border-top: 1px solid #2a2f4e; font-size: 0.7rem; color: #4a4a6a;">
+            <i class="fas fa-arrow-up"></i> <i class="fas fa-arrow-down"></i> - навигация &nbsp;&nbsp;
+            <i class="fas fa-check"></i> - выбрать &nbsp;&nbsp;
+            <i class="fas fa-times"></i> - закрыть (ESC)
+        </div>
+    </div>
+</div>
+
 <div id="authModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
         <h2 id="modalTitle">Вход в аккаунт</h2>
         <div id="errorMsg" class="error-msg"></div>
-        <input type="text" id="loginEmail" placeholder="Email" autocomplete="email">
-        <input type="password" id="loginPassword" placeholder="Пароль" autocomplete="current-password">
+        <input type="text" id="loginEmail" placeholder="Email">
+        <input type="password" id="loginPassword" placeholder="Пароль">
         <button class="btn-primary" id="submitAuthBtn">Войти</button>
         <div class="switch-auth">
             Нет аккаунта? <span id="switchToRegister">Зарегистрироваться</span>
@@ -540,32 +868,34 @@
 
 <main>
     <section id="home">
-        <div class="container hero">
-            <div class="hero-content">
-                <div class="hero-badge"><i class="fas fa-drone"></i> Новая эра логистики</div>
-                <h1>Доставка FPV-дронами<br>Молниеносно и точно</h1>
-                <p>Интеллектуальная система экспресс-доставки посылок с использованием FPV-дронов. До 5 кг, скорость 80 км/ч, работаем 24/7.</p>
-                <div class="btn-group">
-                    <button class="btn-primary" id="orderBtn">Оставить заявку</button>
-                    <button class="btn-outline" id="calcScrollBtn">Рассчитать стоимость</button>
+        <div class="container section-container">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fas fa-drone"></i> Новая эра логистики</div>
+                    <h1>Доставка FPV-дронами<br>Молниеносно и точно</h1>
+                    <p>Интеллектуальная система экспресс-доставки посылок с использованием FPV-дронов. До 5 кг, скорость 80 км/ч, работаем 24/7.</p>
+                    <div class="btn-group">
+                        <button class="btn-primary" id="orderBtn">Оставить заявку</button>
+                        <button class="btn-outline" id="calcScrollBtn">Рассчитать стоимость</button>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-visual">
-                <div class="drone-card">
-                    <i class="fas fa-drone"></i>
-                    <h3>FPV Drone Racer X</h3>
-                    <p>Грузоподъемность до 5 кг<br>Автономный полет до 35 мин</p>
+                <div class="hero-visual">
+                    <div class="drone-card">
+                        <i class="fas fa-drone"></i>
+                        <h3>FPV Drone Racer X</h3>
+                        <p>Грузоподъемность до 5 кг<br>Автономный полет до 35 мин</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="features">
-        <div class="container">
+        <div class="container section-container">
             <h2 class="section-title">Почему FPV-логистика?</h2>
             <p class="section-sub">Скорость, экологичность и обход пробок — будущее доставки уже здесь</p>
             <div class="features-grid">
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-bolt"></i></div><h3>Скорость</h3><p>Среднее время доставки по городу — 15-25 минут</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-bolt"></i></div><h3>Скорость света</h3><p>Среднее время доставки по городу — 15-25 минут</p></div>
                 <div class="feature-card"><div class="feature-icon"><i class="fas fa-leaf"></i></div><h3>Экологичность</h3><p>Полностью электрические дроны с нулевым выбросом CO₂</p></div>
                 <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Автономная навигация</h3><p>ИИ-маршруты, обход препятствий</p></div>
                 <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>Безопасная упаковка</h3><p>Специальные контейнеры, защита от вибраций</p></div>
@@ -574,7 +904,7 @@
     </section>
 
     <section id="delivery">
-        <div class="container">
+        <div class="container section-container">
             <h2 class="section-title">Зоны покрытия</h2>
             <p class="section-sub">Постоянно расширяем сеть хабов</p>
             <div class="zone-grid">
@@ -588,35 +918,76 @@
         </div>
     </section>
 
+    <!-- НОВЫЙ КАЛЬКУЛЯТОР -->
     <section id="calculator">
-        <div class="container">
+        <div class="container section-container">
             <h2 class="section-title">Калькулятор доставки</h2>
-            <p class="section-sub">Укажите параметры посылки</p>
+            <p class="section-sub">Рассчитайте стоимость доставки по нашей формуле</p>
             <div class="calculator">
-                <div class="form-group">
-                    <label>Вес (кг)</label>
-                    <input type="number" id="weight" step="0.1" value="1.2">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-weight-hanging"></i> Вес (кг)</label>
+                        <input type="number" id="weight" step="0.1" value="1.5" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Расстояние (км)</label>
+                        <input type="number" id="distance" step="0.1" value="2.8" min="0">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Расстояние (км)</label>
-                    <input type="number" id="distance" value="8">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-clock"></i> Время доставки</label>
+                        <select id="timeFactor">
+                            <option value="1.0">Будни 11:00–17:00 (коэф. 1.0)</option>
+                            <option value="1.3">Будни 18:00–22:00 (коэф. 1.3)</option>
+                            <option value="1.5" selected>Пт-Вс 18:00–23:00 (коэф. 1.5)</option>
+                            <option value="1.8">Ночь / Срочный заказ (коэф. 1.8)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-cloud-sun"></i> Погодные условия</label>
+                        <select id="weatherFactor">
+                            <option value="1.0" selected>Ясно, ветер до 6 м/с</option>
+                            <option value="1.2">Ветер 6–9 м/с или легкий дождь</option>
+                            <option value="1.5">Сложные условия (шторм, снегопад)</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Срочность</label>
-                    <select id="priority">
-                        <option value="standard">Стандарт (2-4 часа)</option>
-                        <option value="express" selected>Экспресс (до 40 мин)</option>
-                        <option value="instant">Мгновенный FPV (15-25 мин)</option>
-                    </select>
+                
+                <div class="price-details" id="priceDetails">
+                    <div class="price-breakdown">
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">Базовая стоимость</div>
+                            <div class="breakdown-value" id="basePrice">250 ₽</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">За расстояние</div>
+                            <div class="breakdown-value" id="distancePrice">0 ₽</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">За вес (сверх 1 кг)</div>
+                            <div class="breakdown-value" id="weightPrice">0 ₽</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">Сумма до наценок</div>
+                            <div class="breakdown-value" id="subtotal">0 ₽</div>
+                        </div>
+                    </div>
+                    <div class="price-total">
+                        <span>ИТОГО К ОПЛАТЕ:</span>
+                        <span id="totalPrice">0 ₽</span>
+                    </div>
                 </div>
-                <button class="btn-primary" id="calcPriceBtn">Рассчитать стоимость</button>
-                <div class="price-result" id="priceDisplay">Ожидание данных...</div>
+                <div class="info-note">
+                    <i class="fas fa-info-circle"></i> 
+                    Формула расчета: [250 + (км × 35) + (макс(0; кг-1) × 20)] × коэф.времени × коэф.погоды
+                </div>
             </div>
         </div>
     </section>
 
     <section id="reviews">
-        <div class="container">
+        <div class="container section-container">
             <h2 class="section-title">Клиенты о нас</h2>
             <div class="reviews">
                 <div class="review-card"><div class="stars">★★★★★</div><p>"FPV дрон доставил документы за 12 минут!"</p><h4>— Анна К.</h4></div>
@@ -630,106 +1001,274 @@
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <div><div class="logo">FPV<span>logistX</span></div><p>Доставка будущего без границ</p></div>
-            <div><h4>Контакты</h4><p><i class="fas fa-phone-alt"></i> +7 (495) 123-45-67</p><p><i class="fas fa-envelope"></i> hello@fpvlogistx.ru</p></div>
+            <div><div class="logo">SkySlice<span>LogistX</span></div><p>Доставка будущего без границ</p></div>
+            <div><h4>Контакты</h4><p><i class="fas fa-phone-alt"></i> +7 (495) 123-45-67</p><p><i class="fas fa-envelope"></i> hello@skyslicelogistx.ru</p></div>
         </div>
-        <p style="text-align:center;">© 2026 FPVlogistX — инновационная дрон-логистика</p>
+        <p style="text-align:center;">© 2026 SkySliceLogistX — инновационная дрон-логистика</p>
     </div>
 </footer>
 
 <script>
-    // ========== КАЛЬКУЛЯТОР ==========
+    // ========== НОВЫЙ КАЛЬКУЛЯТОР ПО ФОРМУЛЕ ==========
+    // Цена = [250 + (км × 35) + (МАКС(0; кг-1) × 20)] × ВРЕМЯ_КОЭФ × ПОГОДА_КОЭФ
+    
     const weightInput = document.getElementById('weight');
     const distanceInput = document.getElementById('distance');
-    const prioritySelect = document.getElementById('priority');
-    const calcBtn = document.getElementById('calcPriceBtn');
-    const priceDisplay = document.getElementById('priceDisplay');
-
+    const timeSelect = document.getElementById('timeFactor');
+    const weatherSelect = document.getElementById('weatherFactor');
+    
+    const basePriceSpan = document.getElementById('basePrice');
+    const distancePriceSpan = document.getElementById('distancePrice');
+    const weightPriceSpan = document.getElementById('weightPrice');
+    const subtotalSpan = document.getElementById('subtotal');
+    const totalSpan = document.getElementById('totalPrice');
+    
+    // Константы
+    const BASE_FEE = 250;
+    const RATE_PER_KM = 35;
+    const RATE_PER_EXTRA_KG = 20;
+    const FREE_WEIGHT = 1; // Бесплатно до 1 кг
+    
     function calculatePrice() {
+        // Получаем значения
         let weight = parseFloat(weightInput.value);
         let distance = parseFloat(distanceInput.value);
-        let priority = prioritySelect.value;
-
-        if (isNaN(weight) || weight <= 0) weight = 0.5;
-        if (isNaN(distance) || distance <= 0) distance = 1;
-
-        let basePrice = 250;
-        let weightCost = weight * 190;
-        let distanceCost = distance * 45;
-        let priorityMultiplier = 1;
-        if (priority === 'express') priorityMultiplier = 1.3;
-        if (priority === 'instant') priorityMultiplier = 1.8;
-
-        let total = (basePrice + weightCost + distanceCost) * priorityMultiplier;
-        total = Math.round(total);
-        priceDisplay.innerHTML = `💰 Ориентировочная стоимость: <span>${total} ₽</span>`;
+        let timeFactor = parseFloat(timeSelect.value);
+        let weatherFactor = parseFloat(weatherSelect.value);
+        
+        // Валидация
+        if (isNaN(weight) || weight < 0) weight = 0;
+        if (isNaN(distance) || distance < 0) distance = 0;
+        
+        // Расчет веса (только сверх 1 кг)
+        let extraWeight = Math.max(0, weight - FREE_WEIGHT);
+        let weightCost = extraWeight * RATE_PER_EXTRA_KG;
+        
+        // Расчет расстояния
+        let distanceCost = distance * RATE_PER_KM;
+        
+        // Сумма до наценок
+        let subtotal = BASE_FEE + distanceCost + weightCost;
+        
+        // Итоговая цена с коэффициентами
+        let total = subtotal * timeFactor * weatherFactor;
+        
+        // Округление вверх до 10 рублей (психологический прием)
+        total = Math.ceil(total / 10) * 10;
+        
+        // Обновляем отображение
+        basePriceSpan.textContent = `${BASE_FEE} ₽`;
+        distancePriceSpan.textContent = `${Math.round(distanceCost)} ₽`;
+        weightPriceSpan.textContent = `${Math.round(weightCost)} ₽`;
+        subtotalSpan.textContent = `${Math.round(subtotal)} ₽`;
+        totalSpan.textContent = `${Math.round(total)} ₽`;
     }
-
-    calcBtn.addEventListener('click', calculatePrice);
-    window.addEventListener('load', calculatePrice);
-
-    document.getElementById('calcScrollBtn')?.addEventListener('click', () => {
-        document.getElementById('calculator').scrollIntoView({ behavior: 'smooth' });
-    });
-    document.getElementById('orderBtn')?.addEventListener('click', () => {
-        alert('📦 Спасибо! Оператор свяжется с вами.');
-    });
-
+    
+    // Вешаем обработчики
     weightInput.addEventListener('input', calculatePrice);
     distanceInput.addEventListener('input', calculatePrice);
-    prioritySelect.addEventListener('change', calculatePrice);
+    timeSelect.addEventListener('change', calculatePrice);
+    weatherSelect.addEventListener('change', calculatePrice);
+    
+    // Первоначальный расчет
+    calculatePrice();
+    
+    // ========== ПЛАВНЫЙ СКРОЛЛ ==========
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    
+    document.getElementById('calcScrollBtn')?.addEventListener('click', () => {
+        document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    
+    document.getElementById('orderBtn')?.addEventListener('click', () => alert('📦 Спасибо! Оператор свяжется с вами.'));
 
-    // ========== СИСТЕМА АВТОРИЗАЦИИ ==========
-    // Ключи для localStorage
-    const STORAGE_KEY = 'fpvlogistx_users';
-    const CURRENT_USER_KEY = 'fpvlogistx_current_user';
+    // ========== ПОИСК ==========
+    const searchDatabase = [
+        { id: 'home', title: 'Главная', desc: 'Доставка FPV-дронами, скорость 80 км/ч' },
+        { id: 'features', title: 'Преимущества', desc: 'Скорость, экологичность, навигация, упаковка' },
+        { id: 'delivery', title: 'Зоны доставки', desc: 'Центр, пригород, парки, порты' },
+        { id: 'calculator', title: 'Калькулятор', desc: 'Расчет стоимости доставки по формуле' },
+        { id: 'reviews', title: 'Отзывы', desc: 'Мнения клиентов о сервисе' }
+    ];
 
-    // Инициализация: создаем тестового пользователя, если нет
+    const searchModal = document.getElementById('searchModal');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const closeSearchBtn = document.getElementById('closeSearchBtn');
+    const searchFormClick = document.getElementById('searchFormClick');
+    
+    let currentResults = [];
+    let selectedIndex = -1;
+
+    function openSearch() {
+        searchModal.classList.add('active');
+        setTimeout(() => searchInput.focus(), 100);
+        currentResults = [];
+        selectedIndex = -1;
+        searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Начните вводить текст</div>';
+    }
+
+    function closeSearch() {
+        searchModal.classList.remove('active');
+        searchInput.value = '';
+    }
+
+    function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+        
+        if (query.length < 2) {
+            searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Введите минимум 2 символа</div>';
+            return;
+        }
+        
+        const results = [];
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            const title = section.querySelector('h2')?.innerText || '';
+            const text = section.innerText;
+            if (title.toLowerCase().includes(query) || text.toLowerCase().includes(query)) {
+                const id = section.id;
+                if (id) {
+                    results.push({ id: id, title: title, desc: text.substring(0, 100).replace(/\n/g, ' ') + '...' });
+                }
+            }
+        });
+        
+        searchDatabase.forEach(item => {
+            const searchText = (item.title + ' ' + item.desc).toLowerCase();
+            if (searchText.includes(query) && !results.find(r => r.id === item.id)) {
+                results.push(item);
+            }
+        });
+        
+        currentResults = results.slice(0, 10);
+        selectedIndex = -1;
+        
+        if (currentResults.length === 0) {
+            searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Ничего не найдено</div>';
+            return;
+        }
+        
+        function highlightText(text, q) {
+            if (!q) return text;
+            const regex = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+        
+        searchResults.innerHTML = currentResults.map((result, idx) => `
+            <div class="search-result-item" data-idx="${idx}" data-id="${result.id}">
+                <div class="search-result-title">${highlightText(result.title, query)}</div>
+                <div class="search-result-desc">${highlightText(result.desc.substring(0, 80), query)}</div>
+            </div>
+        `).join('');
+        
+        document.querySelectorAll('.search-result-item').forEach(el => {
+            el.addEventListener('click', () => {
+                const id = el.dataset.id;
+                if (id) {
+                    const element = document.getElementById(id);
+                    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    closeSearch();
+                }
+            });
+        });
+    }
+
+    if (searchFormClick) searchFormClick.addEventListener('click', openSearch);
+    searchInput.addEventListener('input', performSearch);
+    closeSearchBtn.addEventListener('click', closeSearch);
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchModal.classList.contains('active')) closeSearch();
+        if (e.key === '/' && !searchModal.classList.contains('active')) {
+            e.preventDefault();
+            openSearch();
+        }
+    });
+    
+    searchInput.addEventListener('keydown', (e) => {
+        const items = document.querySelectorAll('.search-result-item');
+        if (items.length === 0) return;
+        
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+            items.forEach((item, idx) => {
+                item.style.background = idx === selectedIndex ? 'rgba(59, 75, 255, 0.25)' : '';
+            });
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = Math.max(selectedIndex - 1, 0);
+            items.forEach((item, idx) => {
+                item.style.background = idx === selectedIndex ? 'rgba(59, 75, 255, 0.25)' : '';
+            });
+        } else if (e.key === 'Enter' && selectedIndex >= 0) {
+            e.preventDefault();
+            const id = items[selectedIndex]?.dataset.id;
+            if (id) {
+                const element = document.getElementById(id);
+                if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                closeSearch();
+            }
+        }
+    });
+    
+    searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeSearch(); });
+
+    // ========== АВТОРИЗАЦИЯ ==========
+    const STORAGE_KEY = 'skyslice_users';
+    const CURRENT_USER_KEY = 'skyslice_current_user';
+
     function initUsers() {
-        let users = localStorage.getItem(STORAGE_KEY);
-        if (!users) {
-            const defaultUsers = [
-                { email: 'demo@fpvlogistx.ru', password: 'demo123', name: 'Демо Пользователь' },
+        if (!localStorage.getItem(STORAGE_KEY)) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify([
+                { email: 'demo@skyslice.ru', password: 'demo123', name: 'Демо Пользователь' },
                 { email: 'test@test.ru', password: '123456', name: 'Тестовый Аккаунт' }
-            ];
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultUsers));
+            ]));
         }
     }
 
-    // Проверка авторизации при загрузке
     function checkAuth() {
         const currentUser = localStorage.getItem(CURRENT_USER_KEY);
-        const authButtons = document.getElementById('authButtons');
-        const userProfile = document.getElementById('userProfile');
-        const userNameSpan = document.getElementById('userName');
+        const headerAuthBlock = document.getElementById('headerAuthBlock');
+        const headerUserBlock = document.getElementById('headerUserBlock');
+        const headerUserName = document.getElementById('headerUserName');
 
         if (currentUser) {
             const user = JSON.parse(currentUser);
-            authButtons.style.display = 'none';
-            userProfile.style.display = 'flex';
-            userNameSpan.textContent = user.name || user.email.split('@')[0];
+            if (headerAuthBlock) headerAuthBlock.style.display = 'none';
+            if (headerUserBlock) {
+                headerUserBlock.style.display = 'block';
+                if (headerUserName) headerUserName.textContent = user.name || user.email.split('@')[0];
+            }
         } else {
-            authButtons.style.display = 'flex';
-            userProfile.style.display = 'none';
+            if (headerAuthBlock) headerAuthBlock.style.display = 'block';
+            if (headerUserBlock) headerUserBlock.style.display = 'none';
         }
     }
 
-    // Выход из аккаунта
     function logout() {
         localStorage.removeItem(CURRENT_USER_KEY);
         checkAuth();
         alert('Вы вышли из аккаунта');
     }
 
-    // Вход в аккаунт
     function login(email, password) {
         const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
         const user = users.find(u => u.email === email && u.password === password);
-        
         if (user) {
             localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
             checkAuth();
-            closeModal();
+            closeAuthModal();
             alert(`Добро пожаловать, ${user.name || user.email}!`);
             return true;
         } else {
@@ -738,112 +1277,97 @@
         }
     }
 
-    // Регистрация
-    function register(email, password, name) {
+    function register(email, password) {
         const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        
-        // Проверка существующего пользователя
         if (users.find(u => u.email === email)) {
-            showError('Пользователь с таким email уже существует');
+            showError('Пользователь уже существует');
             return false;
         }
-        
-        // Создаем нового пользователя
-        const newUser = { email, password, name: name || email.split('@')[0] };
+        const newUser = { email, password, name: email.split('@')[0] };
         users.push(newUser);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
-        
-        // Автоматически входим
         localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(newUser));
         checkAuth();
-        closeModal();
-        alert(`Регистрация успешна! Добро пожаловать, ${newUser.name}!`);
+        closeAuthModal();
+        alert(`Регистрация успешна! Добро пожаловать!`);
         return true;
     }
 
-    // Показать ошибку
     function showError(msg) {
         const errorDiv = document.getElementById('errorMsg');
-        errorDiv.textContent = msg;
-        errorDiv.style.display = 'block';
-        setTimeout(() => {
-            errorDiv.style.display = 'none';
-        }, 3000);
+        if (errorDiv) {
+            errorDiv.textContent = msg;
+            errorDiv.style.display = 'block';
+            setTimeout(() => errorDiv.style.display = 'none', 3000);
+        }
     }
 
-    // Модальное окно
-    const modal = document.getElementById('authModal');
+    const authModal = document.getElementById('authModal');
     const modalTitle = document.getElementById('modalTitle');
-    const submitBtn = document.getElementById('submitAuthBtn');
+    const submitAuthBtn = document.getElementById('submitAuthBtn');
     const switchLink = document.getElementById('switchToRegister');
     const loginEmail = document.getElementById('loginEmail');
     const loginPassword = document.getElementById('loginPassword');
-    
     let isLoginMode = true;
-    
-    function openModal(mode = 'login') {
+
+    function openAuthModal(mode = 'login') {
         isLoginMode = mode === 'login';
-        modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
-        submitBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
-        switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
-        loginEmail.value = '';
-        loginPassword.value = '';
-        document.getElementById('errorMsg').style.display = 'none';
-        modal.style.display = 'flex';
+        if (modalTitle) modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
+        if (submitAuthBtn) submitAuthBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+        if (switchLink) switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
+        if (loginEmail) loginEmail.value = '';
+        if (loginPassword) loginPassword.value = '';
+        const errorDiv = document.getElementById('errorMsg');
+        if (errorDiv) errorDiv.style.display = 'none';
+        if (authModal) authModal.style.display = 'flex';
     }
-    
-    function closeModal() {
-        modal.style.display = 'none';
+
+    function closeAuthModal() {
+        if (authModal) authModal.style.display = 'none';
     }
-    
+
     function handleAuth() {
-        const email = loginEmail.value.trim();
-        const password = loginPassword.value.trim();
-        
+        const email = loginEmail?.value.trim() || '';
+        const password = loginPassword?.value.trim() || '';
         if (!email || !password) {
             showError('Заполните все поля');
             return;
         }
-        
-        if (isLoginMode) {
-            login(email, password);
-        } else {
-            register(email, password, '');
-        }
+        if (isLoginMode) login(email, password);
+        else register(email, password);
     }
-    
-    // Навешиваем обработчики
-    document.getElementById('loginBtn').addEventListener('click', () => openModal('login'));
-    document.getElementById('registerBtn').addEventListener('click', () => openModal('register'));
-    document.getElementById('logoutBtn').addEventListener('click', logout);
-    document.querySelector('.close-modal').addEventListener('click', closeModal);
-    submitBtn.addEventListener('click', handleAuth);
-    switchLink.addEventListener('click', () => {
+
+    document.getElementById('headerLoginBtn')?.addEventListener('click', () => openAuthModal('login'));
+    document.getElementById('headerRegisterBtn')?.addEventListener('click', () => openAuthModal('register'));
+    document.getElementById('headerLogoutBtn')?.addEventListener('click', logout);
+    document.querySelector('.close-modal')?.addEventListener('click', closeAuthModal);
+    submitAuthBtn?.addEventListener('click', handleAuth);
+    switchLink?.addEventListener('click', () => {
         isLoginMode = !isLoginMode;
-        modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
-        submitBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
-        switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
-        document.getElementById('errorMsg').style.display = 'none';
-        loginEmail.value = '';
-        loginPassword.value = '';
+        if (modalTitle) modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
+        if (submitAuthBtn) submitAuthBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+        if (switchLink) switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
+        const errorDiv = document.getElementById('errorMsg');
+        if (errorDiv) errorDiv.style.display = 'none';
     });
-    
-    // Закрытие по клику вне окна
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-    
-    // Enter для отправки
-    loginEmail.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') loginPassword.focus();
-    });
-    loginPassword.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleAuth();
-    });
-    
-    // Инициализация
+    authModal?.addEventListener('click', (e) => { if (e.target === authModal) closeAuthModal(); });
+    loginEmail?.addEventListener('keypress', (e) => { if (e.key === 'Enter') loginPassword?.focus(); });
+    loginPassword?.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleAuth(); });
+
     initUsers();
     checkAuth();
+
+    // ========== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ ==========
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const lang = btn.dataset.lang;
+            if (lang === 'en') {
+                alert('English version in development / Английская версия в разработке');
+            }
+        });
+    });
 </script>
 </body>
 </html>
