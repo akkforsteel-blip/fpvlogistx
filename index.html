@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>SkySliceLogistX | Доставка FPV-дронами</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 140px;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0a0c12;
@@ -25,7 +25,6 @@
             line-height: 1.5;
             overflow-x: hidden;
         }
-
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -36,7 +35,6 @@
             background: #3b4bff;
             border-radius: 10px;
         }
-
         .bg-glow {
             position: fixed;
             top: 0;
@@ -56,13 +54,11 @@
             opacity: 0.2;
             pointer-events: none;
         }
-
         .container {
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 30px;
         }
-
         header {
             position: sticky;
             top: 0;
@@ -71,7 +67,6 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(59, 75, 255, 0.2);
         }
-
         .top-bar {
             padding: 10px 0;
             border-bottom: 1px solid rgba(59, 75, 255, 0.15);
@@ -82,7 +77,6 @@
             align-items: center;
             gap: 20px;
         }
-
         .lang-switch {
             display: flex;
             gap: 5px;
@@ -108,7 +102,6 @@
         .lang-btn:hover:not(.active) {
             color: white;
         }
-
         .search-wrapper {
             flex: 1;
             max-width: 400px;
@@ -124,7 +117,8 @@
             transition: 0.2s;
             cursor: pointer;
         }
-        .search-form:hover, .search-form:focus-within {
+        .search-form:hover,
+        .search-form:focus-within {
             border-color: #3b4bff;
             background: rgba(59, 75, 255, 0.1);
         }
@@ -146,7 +140,6 @@
         .search-form input::placeholder {
             color: #4a4a6a;
         }
-
         .auth-buttons-header {
             display: flex;
             gap: 10px;
@@ -181,7 +174,6 @@
             background: #5f6eff;
             transform: translateY(-2px);
         }
-
         .user-profile-header {
             display: flex;
             align-items: center;
@@ -211,7 +203,6 @@
         .logout-header:hover {
             background: rgba(255, 59, 59, 0.2);
         }
-
         .main-nav {
             padding: 20px 0;
         }
@@ -251,7 +242,6 @@
         .nav-links a:hover {
             color: #6c7eff;
         }
-
         section {
             padding: 60px 0;
             min-height: 100vh;
@@ -276,7 +266,6 @@
             max-width: 700px;
             margin: 0 auto 60px auto;
         }
-
         .hero {
             display: flex;
             flex-direction: column;
@@ -292,26 +281,29 @@
         .hero-badge {
             background: rgba(59, 75, 255, 0.2);
             display: inline-block;
-            padding: 6px 14px;
+            padding: 8px 20px;
             border-radius: 40px;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            color: #b9c3e6;
         }
         .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 18px;
-            background: linear-gradient(to right, #ffffff, #b1bcff);
+            font-size: 4.2rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffffff, #8a9aff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -1px;
         }
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #b9c3e6;
-            max-width: 600px;
-            margin: 0 auto 28px auto;
+            max-width: 650px;
+            margin: 0 auto 30px auto;
+            font-weight: 400;
         }
         .btn-group {
             display: flex;
@@ -321,7 +313,7 @@
         }
         .btn-primary {
             background: #3b4bff;
-            padding: 12px 28px;
+            padding: 14px 32px;
             border-radius: 40px;
             font-weight: 700;
             border: none;
@@ -337,7 +329,7 @@
         .btn-outline {
             border: 1px solid #3b4bff;
             background: transparent;
-            padding: 12px 28px;
+            padding: 14px 32px;
             border-radius: 40px;
             color: white;
             font-weight: 600;
@@ -367,11 +359,16 @@
             color: #6c7eff;
         }
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
         }
-
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -399,7 +396,6 @@
             margin-bottom: 16px;
             font-size: 1.5rem;
         }
-
         .zone-grid {
             display: flex;
             flex-wrap: wrap;
@@ -419,8 +415,6 @@
         .zone-item i {
             color: #3b4bff;
         }
-
-        /* НОВЫЙ КАЛЬКУЛЯТОР */
         .calculator {
             background: linear-gradient(145deg, #0e1120, #070914);
             border-radius: 48px;
@@ -449,7 +443,8 @@
             color: #6c7eff;
             margin-right: 8px;
         }
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 14px 20px;
             background: #1b1f32;
@@ -460,7 +455,8 @@
             outline: none;
             transition: 0.2s;
         }
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             border-color: #3b4bff;
         }
         .price-details {
@@ -522,7 +518,6 @@
             margin-right: 8px;
             color: #6c7eff;
         }
-
         .reviews {
             display: flex;
             flex-wrap: wrap;
@@ -550,7 +545,6 @@
         .review-card h4 {
             color: #6c7eff;
         }
-
         footer {
             border-top: 1px solid #1f233e;
             padding: 48px 0 24px;
@@ -571,7 +565,6 @@
         footer p {
             text-align: center;
         }
-
         .modal {
             display: none;
             position: fixed;
@@ -646,7 +639,6 @@
             margin-bottom: 15px;
             display: none;
         }
-
         .search-modal {
             display: none;
             position: fixed;
@@ -736,6 +728,245 @@
             padding: 0 2px;
         }
 
+        /* ===== КНОПКА МЕНЮ ===== */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 200;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 10px;
+        }
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+        .menu-toggle .bar {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        .menu-toggle .bar:nth-child(2) {
+            width: 22px;
+            margin-left: 8px;
+        }
+        .menu-toggle:hover .bar {
+            background: #6c7eff;
+        }
+
+        /* ===== ШТОРКА ПЕРЕВОЗЧИКОВ ===== */
+        .carrier-panel {
+            position: fixed;
+            top: 0;
+            left: -380px;
+            width: 340px;
+            height: 100vh;
+            z-index: 199;
+            background: rgba(10, 12, 18, 0.98);
+            backdrop-filter: blur(20px);
+            border-right: 2px solid rgba(59, 75, 255, 0.3);
+            transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 30px 25px;
+            box-shadow: 10px 0 40px rgba(0, 0, 0, 0.8);
+            overflow-y: auto;
+        }
+        .carrier-panel.open {
+            left: 0;
+        }
+        .carrier-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(59, 75, 255, 0.2);
+        }
+        .carrier-panel-header h3 {
+            color: #eef2ff;
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .carrier-panel-header h3 i {
+            color: #6c7eff;
+        }
+        .carrier-close {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 5px;
+        }
+        .carrier-close:hover {
+            color: white;
+            transform: rotate(90deg);
+        }
+        .carrier-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .carrier-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(59, 75, 255, 0.15);
+            border-radius: 16px;
+            padding: 16px 20px;
+            color: white;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+            width: 100%;
+        }
+        .carrier-btn:hover {
+            background: rgba(59, 75, 255, 0.1);
+            border-color: #3b4bff;
+            transform: translateX(4px);
+        }
+        .carrier-btn i {
+            color: #6c7eff;
+            font-size: 1.4rem;
+            width: 30px;
+            text-align: center;
+        }
+        .carrier-btn.active {
+            background: rgba(59, 75, 255, 0.2);
+            border-color: #3b4bff;
+            box-shadow: 0 0 20px rgba(59, 75, 255, 0.1);
+        }
+        .carrier-btn .check {
+            margin-left: auto;
+            color: #3b4bff;
+            font-size: 1.2rem;
+            display: none;
+        }
+        .carrier-btn.active .check {
+            display: block;
+        }
+
+        .panel-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 198;
+        }
+        .panel-overlay.active {
+            display: block;
+        }
+
+        /* ===== НОВАЯ КАРТА ===== */
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(59, 75, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 300px;
+        }
+        .map-wrapper:hover {
+            border-color: #3b4bff;
+            box-shadow: 0 0 30px rgba(59, 75, 255, 0.1);
+        }
+        .map-wrapper.expanded {
+            height: 500px;
+            max-width: 1000px;
+        }
+        #droneMap {
+            width: 100%;
+            height: 100%;
+            background: #1a1e2e;
+        }
+        .map-hint {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 12, 18, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #99a4d4;
+            border: 1px solid rgba(59, 75, 255, 0.2);
+            pointer-events: none;
+            transition: 0.3s;
+        }
+        .map-wrapper.expanded .map-hint {
+            opacity: 0;
+        }
+        .map-wrapper .expand-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(10, 12, 18, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c7eff;
+            border: 1px solid rgba(59, 75, 255, 0.2);
+            transition: 0.3s;
+            pointer-events: none;
+        }
+        .map-wrapper.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Leaflet Custom Styles */
+        .leaflet-popup-content-wrapper {
+            background: #1b1f32;
+            color: white;
+            border-radius: 16px;
+            border: 1px solid rgba(59, 75, 255, 0.3);
+        }
+        .leaflet-popup-tip {
+            background: #1b1f32;
+        }
+        .leaflet-popup-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .leaflet-popup-content strong {
+            color: #6c7eff;
+        }
+        .leaflet-container {
+            background: #0a0c12 !important;
+        }
+
         @media (max-width: 900px) {
             html {
                 scroll-padding-top: 200px;
@@ -744,7 +975,7 @@
                 margin-top: -20px;
             }
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             .nav-container {
                 flex-direction: column;
@@ -782,6 +1013,34 @@
             .price-total span:last-child {
                 font-size: 1.6rem;
             }
+            .menu-toggle {
+                top: 10px;
+                left: 10px;
+                width: 44px;
+                height: 44px;
+            }
+            .menu-toggle .bar {
+                width: 24px;
+                height: 2.5px;
+            }
+            .menu-toggle .bar:nth-child(2) {
+                width: 18px;
+                margin-left: 6px;
+            }
+            .carrier-panel {
+                width: 300px;
+                left: -320px;
+                padding: 25px 20px;
+            }
+            .carrier-panel.open {
+                left: 0;
+            }
+            .map-wrapper {
+                height: 200px;
+            }
+            .map-wrapper.expanded {
+                height: 350px;
+            }
         }
         button {
             font-family: 'Inter', sans-serif;
@@ -789,585 +1048,819 @@
     </style>
 </head>
 <body>
-<div class="bg-glow"></div>
+    <div class="bg-glow"></div>
 
-<header>
-    <div class="top-bar">
+    <!-- ===== КНОПКА МЕНЮ ===== -->
+    <button class="menu-toggle" id="menuToggle" title="Выбрать перевозчика">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <!-- ===== ОВЕРЛЕЙ ===== -->
+    <div class="panel-overlay" id="panelOverlay"></div>
+
+    <!-- ===== ШТОРКА ПЕРЕВОЗЧИКОВ ===== -->
+    <div class="carrier-panel" id="carrierPanel">
+        <div class="carrier-panel-header">
+            <h3><i class="fas fa-shipping-fast"></i> Перевозчики</h3>
+            <button class="carrier-close" id="carrierClose">&times;</button>
+        </div>
+        <div class="carrier-list">
+            <button class="carrier-btn" data-carrier="sdek">
+                <i class="fas fa-box"></i> СДЭК
+                <span class="check"><i class="fas fa-check-circle"></i></span>
+            </button>
+            <button class="carrier-btn" data-carrier="ozon">
+                <i class="fas fa-shopping-bag"></i> Ozon
+                <span class="check"><i class="fas fa-check-circle"></i></span>
+            </button>
+            <button class="carrier-btn" data-carrier="fesco">
+                <i class="fas fa-ship"></i> FESCO
+                <span class="check"><i class="fas fa-check-circle"></i></span>
+            </button>
+            <button class="carrier-btn" data-carrier="yandex">
+                <i class="fas fa-map-pin"></i> Яндекс
+                <span class="check"><i class="fas fa-check-circle"></i></span>
+            </button>
+            <button class="carrier-btn active" data-carrier="skyslice" id="skysliceCarrierBtn">
+                <i class="fas fa-drone"></i> SkySlice (FPV)
+                <span class="check"><i class="fas fa-check-circle"></i></span>
+            </button>
+        </div>
+    </div>
+
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="lang-switch">
+                    <button class="lang-btn active" data-lang="ru">RU</button>
+                    <button class="lang-btn" data-lang="en">ENG</button>
+                </div>
+                <div class="search-wrapper">
+                    <div class="search-form" id="searchFormClick">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="topSearchInput" placeholder="Поиск по сайту">
+                    </div>
+                </div>
+                <div id="headerAuthBlock">
+                    <div class="auth-buttons-header">
+                        <button class="btn-login-header" id="headerLoginBtn">Вход</button>
+                        <button class="btn-register-header" id="headerRegisterBtn">Регистрация</button>
+                    </div>
+                </div>
+                <div id="headerUserBlock" style="display: none;">
+                    <div class="user-profile-header">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="user-name-header" id="headerUserName">Пользователь</span>
+                        <button class="logout-header" id="headerLogoutBtn">Выйти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-nav">
+            <div class="container nav-container">
+                <div class="logo">SkySlice<span>LogistX</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home" data-nav="Главная">Главная</a></li>
+                    <li><a href="#features" data-nav="Преимущества">Преимущества</a></li>
+                    <li><a href="#delivery" data-nav="Зоны">Зоны</a></li>
+                    <li><a href="#calculator" data-nav="Калькулятор">Калькулятор</a></li>
+                    <li><a href="#reviews" data-nav="Отзывы">Отзывы</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="searchModal" class="search-modal">
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Поиск по сайту...">
+                <button class="close-search" id="closeSearchBtn">&times;</button>
+            </div>
+            <div id="searchResults" class="search-results">
+                <div class="no-results"><i class="fas fa-search"></i> Начните вводить текст</div>
+            </div>
+            <div style="padding: 10px 20px; border-top: 1px solid #2a2f4e; font-size: 0.7rem; color: #4a4a6a;">
+                <i class="fas fa-arrow-up"></i> <i class="fas fa-arrow-down"></i> - навигация &nbsp;&nbsp;
+                <i class="fas fa-check"></i> - выбрать &nbsp;&nbsp;
+                <i class="fas fa-times"></i> - закрыть (ESC)
+            </div>
+        </div>
+    </div>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle">Вход в аккаунт</h2>
+            <div id="errorMsg" class="error-msg"></div>
+            <input type="text" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Пароль">
+            <button class="btn-primary" id="submitAuthBtn">Войти</button>
+            <div class="switch-auth">
+                Нет аккаунта? <span id="switchToRegister">Зарегистрироваться</span>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section id="home">
+            <div class="container section-container">
+                <div class="hero">
+                    <div class="hero-content">
+                        <div class="hero-badge"><i class="fas fa-drone"></i> Новая эра логистики</div>
+                        <h1>Доставка FPV-дронами<br>Молниеносно и точно</h1>
+                        <p>Интеллектуальная система экспресс-доставки посылок с использованием FPV-дронов. До 5 кг, скорость 80 км/ч, работаем 24/7.</p>
+                        <div class="btn-group">
+                            <button class="btn-primary" id="orderBtn">Оставить заявку</button>
+                            <button class="btn-outline" id="calcScrollBtn">Рассчитать стоимость</button>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="drone-card">
+                            <i class="fas fa-drone"></i>
+                            <h3>FPV Drone Racer X</h3>
+                            <p>Грузоподъемность до 5 кг<br>Автономный полет до 35 мин</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container section-container">
+                <h2 class="section-title">Почему FPV-логистика?</h2>
+                <p class="section-sub">Скорость, экологичность и обход пробок — будущее доставки уже здесь</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Скорость</h3>
+                        <p>Среднее время доставки по городу — 5-10 минут</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                        <h3>Экологичность</h3>
+                        <p>Полностью электрические дроны с нулевым выбросом CO₂</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Автономная навигация</h3>
+                        <p>ИИ-маршруты, обход препятствий</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Безопасная упаковка</h3>
+                        <p>Специальные контейнеры, защита от вибраций</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="delivery">
+            <div class="container section-container">
+                <h2 class="section-title">Зоны покрытия</h2>
+                <p class="section-sub">Постоянно расширяем сеть хабов</p>
+                <div class="zone-grid" style="margin-bottom: 30px;">
+                    <div class="zone-item"><i class="fas fa-city"></i> Центр города</div>
+                    <div class="zone-item"><i class="fas fa-building"></i> Деловые кварталы</div>
+                    <div class="zone-item"><i class="fas fa-tree"></i> Пригород до 20 км</div>
+                    <div class="zone-item"><i class="fas fa-industry"></i> Индустриальные парки</div>
+                    <div class="zone-item"><i class="fas fa-ship"></i> Портовые терминалы</div>
+                    <div class="zone-item"><i class="fas fa-charging-station"></i> Зарядные хабы</div>
+                </div>
+
+                <!-- ===== НОВАЯ КАРТА ===== -->
+                <div class="map-wrapper" id="mapWrapper">
+                    <div id="droneMap"></div>
+                    <div class="map-hint"><i class="fas fa-hand-pointer"></i> Нажмите, чтобы развернуть</div>
+                    <div class="expand-icon"><i class="fas fa-expand"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator">
+            <div class="container section-container">
+                <h2 class="section-title">Калькулятор доставки</h2>
+                <p class="section-sub">Рассчитайте стоимость доставки по нашей формуле</p>
+                <div class="calculator">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-weight-hanging"></i> Вес (кг)</label>
+                            <input type="number" id="weight" step="0.1" value="1.5" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Расстояние (км)</label>
+                            <input type="number" id="distance" step="0.1" value="2.8" min="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-clock"></i> Время доставки</label>
+                            <select id="timeFactor">
+                                <option value="1.0">Будни 11:00–17:00 (коэф. 1.0)</option>
+                                <option value="1.3">Будни 18:00–22:00 (коэф. 1.3)</option>
+                                <option value="1.5" selected>Пт-Вс 18:00–23:00 (коэф. 1.5)</option>
+                                <option value="1.8">Ночь / Срочный заказ (коэф. 1.8)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-cloud-sun"></i> Погодные условия</label>
+                            <select id="weatherFactor">
+                                <option value="1.0" selected>Ясно, ветер до 6 м/с</option>
+                                <option value="1.2">Ветер 6-9 м/с или легкий дождь</option>
+                                <option value="1.5">Сложные условия (шторм, снегопад)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="price-details" id="priceDetails">
+                        <div class="price-breakdown">
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Базовая стоимость</div>
+                                <div class="breakdown-value" id="basePrice">250 ₽</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">За расстояние</div>
+                                <div class="breakdown-value" id="distancePrice">0 ₽</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">За вес (сверх 1 кг)</div>
+                                <div class="breakdown-value" id="weightPrice">0 ₽</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="breakdown-label">Сумма до наценок</div>
+                                <div class="breakdown-value" id="subtotal">0 ₽</div>
+                            </div>
+                        </div>
+                        <div class="price-total">
+                            <span>ИТОГО К ОПЛАТЕ:</span>
+                            <span id="totalPrice">0 ₽</span>
+                        </div>
+                    </div>
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Формула расчета: [250 + (км × 35) + (макс(0; кг-1) × 20)] × коэф.времени × коэф.погоды
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <div class="container section-container">
+                <h2 class="section-title">Клиенты о нас</h2>
+                <div class="reviews">
+                    <div class="review-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"FPV дрон доставил документы за 12 минут!"</p>
+                        <h4>— Анна К.</h4>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars">★★★★☆</div>
+                        <p>"Надежно, быстро, трекинг в реальном времени."</p>
+                        <h4>— Дмитрий В.</h4>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Клиенты в восторге! Спасибо за сервис!"</p>
+                        <h4>— Елена П.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <div class="container">
-            <div class="lang-switch">
-                <button class="lang-btn active" data-lang="ru">RU</button>
-                <button class="lang-btn" data-lang="en">ENG</button>
-            </div>
-            <div class="search-wrapper">
-                <div class="search-form" id="searchFormClick">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="topSearchInput" placeholder="Поиск по сайту" readonly>
+            <div class="footer-grid">
+                <div>
+                    <div class="logo">SkySlice<span>LogistX</span></div>
+                    <p>Доставка будущего без границ</p>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <p><i class="fas fa-phone-alt"></i> +7 (495) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> skyslicelogistix@gmail.com</p>
                 </div>
             </div>
-            <div id="headerAuthBlock">
-                <div class="auth-buttons-header">
-                    <button class="btn-login-header" id="headerLoginBtn">Вход</button>
-                    <button class="btn-register-header" id="headerRegisterBtn">Регистрация</button>
-                </div>
-            </div>
-            <div id="headerUserBlock" style="display: none;">
-                <div class="user-profile-header">
-                    <i class="fas fa-user-circle"></i>
-                    <span class="user-name-header" id="headerUserName">Пользователь</span>
-                    <button class="logout-header" id="headerLogoutBtn">Выйти</button>
-                </div>
-            </div>
+            <p style="text-align:center;">© 2026 SkySliceLogistX — инновационная дрон-логистика</p>
         </div>
-    </div>
+    </footer>
 
-    <div class="main-nav">
-        <div class="container nav-container">
-            <div class="logo">SkySlice<span>LogistX</span></div>
-            <ul class="nav-links">
-                <li><a href="#home" data-nav="Главная">Главная</a></li>
-                <li><a href="#features" data-nav="Преимущества">Преимущества</a></li>
-                <li><a href="#delivery" data-nav="Зоны">Зоны</a></li>
-                <li><a href="#calculator" data-nav="Калькулятор">Калькулятор</a></li>
-                <li><a href="#reviews" data-nav="Отзывы">Отзывы</a></li>
-            </ul>
-        </div>
-    </div>
-</header>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<div id="searchModal" class="search-modal">
-    <div class="search-modal-content">
-        <div class="search-input-wrapper">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Поиск по сайту...">
-            <button class="close-search" id="closeSearchBtn">&times;</button>
-        </div>
-        <div id="searchResults" class="search-results">
-            <div class="no-results"><i class="fas fa-search"></i> Начните вводить текст</div>
-        </div>
-        <div style="padding: 10px 20px; border-top: 1px solid #2a2f4e; font-size: 0.7rem; color: #4a4a6a;">
-            <i class="fas fa-arrow-up"></i> <i class="fas fa-arrow-down"></i> - навигация &nbsp;&nbsp;
-            <i class="fas fa-check"></i> - выбрать &nbsp;&nbsp;
-            <i class="fas fa-times"></i> - закрыть (ESC)
-        </div>
-    </div>
-</div>
+    <script>
+        // ========== КАЛЬКУЛЯТОР ==========
+        const weightInput = document.getElementById('weight');
+        const distanceInput = document.getElementById('distance');
+        const timeSelect = document.getElementById('timeFactor');
+        const weatherSelect = document.getElementById('weatherFactor');
 
-<div id="authModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2 id="modalTitle">Вход в аккаунт</h2>
-        <div id="errorMsg" class="error-msg"></div>
-        <input type="text" id="loginEmail" placeholder="Email">
-        <input type="password" id="loginPassword" placeholder="Пароль">
-        <button class="btn-primary" id="submitAuthBtn">Войти</button>
-        <div class="switch-auth">
-            Нет аккаунта? <span id="switchToRegister">Зарегистрироваться</span>
-        </div>
-    </div>
-</div>
+        const basePriceSpan = document.getElementById('basePrice');
+        const distancePriceSpan = document.getElementById('distancePrice');
+        const weightPriceSpan = document.getElementById('weightPrice');
+        const subtotalSpan = document.getElementById('subtotal');
+        const totalSpan = document.getElementById('totalPrice');
 
-<main>
-    <section id="home">
-        <div class="container section-container">
-            <div class="hero">
-                <div class="hero-content">
-                    <div class="hero-badge"><i class="fas fa-drone"></i> Новая эра логистики</div>
-                    <h1>Доставка FPV-дронами<br>Молниеносно и точно</h1>
-                    <p>Интеллектуальная система экспресс-доставки посылок с использованием FPV-дронов. До 5 кг, скорость 80 км/ч, работаем 24/7.</p>
-                    <div class="btn-group">
-                        <button class="btn-primary" id="orderBtn">Оставить заявку</button>
-                        <button class="btn-outline" id="calcScrollBtn">Рассчитать стоимость</button>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="drone-card">
-                        <i class="fas fa-drone"></i>
-                        <h3>FPV Drone Racer X</h3>
-                        <p>Грузоподъемность до 5 кг<br>Автономный полет до 35 мин</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        const BASE_FEE = 250;
+        const RATE_PER_KM = 35;
+        const RATE_PER_EXTRA_KG = 20;
+        const FREE_WEIGHT = 1;
 
-    <section id="features">
-        <div class="container section-container">
-            <h2 class="section-title">Почему FPV-логистика?</h2>
-            <p class="section-sub">Скорость, экологичность и обход пробок — будущее доставки уже здесь</p>
-            <div class="features-grid">
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-bolt"></i></div><h3>Скорость</h3><p>Среднее время доставки по городу — 5-10 минут</p></div>
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-leaf"></i></div><h3>Экологичность</h3><p>Полностью электрические дроны с нулевым выбросом CO₂</p></div>
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Автономная навигация</h3><p>ИИ-маршруты, обход препятствий</p></div>
-                <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>Безопасная упаковка</h3><p>Специальные контейнеры, защита от вибраций</p></div>
-            </div>
-        </div>
-    </section>
+        function calculatePrice() {
+            let weight = parseFloat(weightInput.value) || 0;
+            let distance = parseFloat(distanceInput.value) || 0;
+            let timeFactor = parseFloat(timeSelect.value);
+            let weatherFactor = parseFloat(weatherSelect.value);
 
-    <section id="delivery">
-        <div class="container section-container">
-            <h2 class="section-title">Зоны покрытия</h2>
-            <p class="section-sub">Постоянно расширяем сеть хабов</p>
-            <div class="zone-grid">
-                <div class="zone-item"><i class="fas fa-city"></i> Центр города</div>
-                <div class="zone-item"><i class="fas fa-building"></i> Деловые кварталы</div>
-                <div class="zone-item"><i class="fas fa-tree"></i> Пригород до 20 км</div>
-                <div class="zone-item"><i class="fas fa-industry"></i> Индустриальные парки</div>
-                <div class="zone-item"><i class="fas fa-ship"></i> Портовые терминалы</div>
-                <div class="zone-item"><i class="fas fa-charging-station"></i> Зарядные хабы</div>
-            </div>
-        </div>
-    </section>
+            if (weight < 0) weight = 0;
+            if (distance < 0) distance = 0;
 
-    <!-- НОВЫЙ КАЛЬКУЛЯТОР -->
-    <section id="calculator">
-        <div class="container section-container">
-            <h2 class="section-title">Калькулятор доставки</h2>
-            <p class="section-sub">Рассчитайте стоимость доставки по нашей формуле</p>
-            <div class="calculator">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label><i class="fas fa-weight-hanging"></i> Вес (кг)</label>
-                        <input type="number" id="weight" step="0.1" value="1.5" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-map-marker-alt"></i> Расстояние (км)</label>
-                        <input type="number" id="distance" step="0.1" value="2.8" min="0">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label><i class="fas fa-clock"></i> Время доставки</label>
-                        <select id="timeFactor">
-                            <option value="1.0">Будни 11:00–17:00 (коэф. 1.0)</option>
-                            <option value="1.3">Будни 18:00–22:00 (коэф. 1.3)</option>
-                            <option value="1.5" selected>Пт-Вс 18:00–23:00 (коэф. 1.5)</option>
-                            <option value="1.8">Ночь / Срочный заказ (коэф. 1.8)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-cloud-sun"></i> Погодные условия</label>
-                        <select id="weatherFactor">
-                            <option value="1.0" selected>Ясно, ветер до 6 м/с</option>
-                            <option value="1.2">Ветер 6–9 м/с или легкий дождь</option>
-                            <option value="1.5">Сложные условия (шторм, снегопад)</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="price-details" id="priceDetails">
-                    <div class="price-breakdown">
-                        <div class="breakdown-item">
-                            <div class="breakdown-label">Базовая стоимость</div>
-                            <div class="breakdown-value" id="basePrice">250 ₽</div>
-                        </div>
-                        <div class="breakdown-item">
-                            <div class="breakdown-label">За расстояние</div>
-                            <div class="breakdown-value" id="distancePrice">0 ₽</div>
-                        </div>
-                        <div class="breakdown-item">
-                            <div class="breakdown-label">За вес (сверх 1 кг)</div>
-                            <div class="breakdown-value" id="weightPrice">0 ₽</div>
-                        </div>
-                        <div class="breakdown-item">
-                            <div class="breakdown-label">Сумма до наценок</div>
-                            <div class="breakdown-value" id="subtotal">0 ₽</div>
-                        </div>
-                    </div>
-                    <div class="price-total">
-                        <span>ИТОГО К ОПЛАТЕ:</span>
-                        <span id="totalPrice">0 ₽</span>
-                    </div>
-                </div>
-                <div class="info-note">
-                    <i class="fas fa-info-circle"></i> 
-                    Формула расчета: [250 + (км × 35) + (макс(0; кг-1) × 20)] × коэф.времени × коэф.погоды
-                </div>
-            </div>
-        </div>
-    </section>
+            const extraWeight = Math.max(0, weight - FREE_WEIGHT);
+            const base = BASE_FEE;
+            const distanceCost = distance * RATE_PER_KM;
+            const weightCost = extraWeight * RATE_PER_EXTRA_KG;
+            const subtotal = base + distanceCost + weightCost;
+            let total = subtotal * timeFactor * weatherFactor;
+            total = Math.ceil(total / 10) * 10;
 
-    <section id="reviews">
-        <div class="container section-container">
-            <h2 class="section-title">Клиенты о нас</h2>
-            <div class="reviews">
-                <div class="review-card"><div class="stars">★★★★★</div><p>"FPV дрон доставил документы за 12 минут!"</p><h4>— Анна К.</h4></div>
-                <div class="review-card"><div class="stars">★★★★☆</div><p>"Надежно, быстро, трекинг в реальном времени."</p><h4>— Дмитрий В.</h4></div>
-                <div class="review-card"><div class="stars">★★★★★</div><p>"Клиенты в восторге! Спасибо за сервис!"</p><h4>— Елена П.</h4></div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div><div class="logo">SkySlice<span>LogistX</span></div><p>Доставка будущего без границ</p></div>
-            <div><h4>Контакты</h4><p><i class="fas fa-phone-alt"></i> +7 (495) 123-45-67</p><p><i class="fas fa-envelope"></i> skyslicelogistix@gmail.com</p></div>
-        </div>
-        <p style="text-align:center;">© 2026 SkySliceLogistX — инновационная дрон-логистика</p>
-    </div>
-</footer>
-
-<script>
-    // ========== НОВЫЙ КАЛЬКУЛЯТОР ПО ФОРМУЛЕ ==========
-    // Цена = [250 + (км × 35) + (МАКС(0; кг-1) × 20)] × ВРЕМЯ_КОЭФ × ПОГОДА_КОЭФ
-    
-    const weightInput = document.getElementById('weight');
-    const distanceInput = document.getElementById('distance');
-    const timeSelect = document.getElementById('timeFactor');
-    const weatherSelect = document.getElementById('weatherFactor');
-    
-    const basePriceSpan = document.getElementById('basePrice');
-    const distancePriceSpan = document.getElementById('distancePrice');
-    const weightPriceSpan = document.getElementById('weightPrice');
-    const subtotalSpan = document.getElementById('subtotal');
-    const totalSpan = document.getElementById('totalPrice');
-    
-    // Константы
-    const BASE_FEE = 250;
-    const RATE_PER_KM = 35;
-    const RATE_PER_EXTRA_KG = 20;
-    const FREE_WEIGHT = 1; // Бесплатно до 1 кг
-    
-    function calculatePrice() {
-        // Получаем значения
-        let weight = parseFloat(weightInput.value);
-        let distance = parseFloat(distanceInput.value);
-        let timeFactor = parseFloat(timeSelect.value);
-        let weatherFactor = parseFloat(weatherSelect.value);
-        
-        // Валидация
-        if (isNaN(weight) || weight < 0) weight = 0;
-        if (isNaN(distance) || distance < 0) distance = 0;
-        
-        // Расчет веса (только сверх 1 кг)
-        let extraWeight = Math.max(0, weight - FREE_WEIGHT);
-        let weightCost = extraWeight * RATE_PER_EXTRA_KG;
-        
-        // Расчет расстояния
-        let distanceCost = distance * RATE_PER_KM;
-        
-        // Сумма до наценок
-        let subtotal = BASE_FEE + distanceCost + weightCost;
-        
-        // Итоговая цена с коэффициентами
-        let total = subtotal * timeFactor * weatherFactor;
-        
-        // Округление вверх до 10 рублей (психологический прием)
-        total = Math.ceil(total / 10) * 10;
-        
-        // Обновляем отображение
-        basePriceSpan.textContent = `${BASE_FEE} ₽`;
-        distancePriceSpan.textContent = `${Math.round(distanceCost)} ₽`;
-        weightPriceSpan.textContent = `${Math.round(weightCost)} ₽`;
-        subtotalSpan.textContent = `${Math.round(subtotal)} ₽`;
-        totalSpan.textContent = `${Math.round(total)} ₽`;
-    }
-    
-    // Вешаем обработчики
-    weightInput.addEventListener('input', calculatePrice);
-    distanceInput.addEventListener('input', calculatePrice);
-    timeSelect.addEventListener('change', calculatePrice);
-    weatherSelect.addEventListener('change', calculatePrice);
-    
-    // Первоначальный расчет
-    calculatePrice();
-    
-    // ========== ПЛАВНЫЙ СКРОЛЛ ==========
-    document.querySelectorAll('.nav-links a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-    
-    document.getElementById('calcScrollBtn')?.addEventListener('click', () => {
-        document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    
-    document.getElementById('orderBtn')?.addEventListener('click', () => alert('📦 Спасибо! Оператор свяжется с вами.'));
-
-    // ========== ПОИСК ==========
-    const searchDatabase = [
-        { id: 'home', title: 'Главная', desc: 'Доставка FPV-дронами, скорость 80 км/ч' },
-        { id: 'features', title: 'Преимущества', desc: 'Скорость, экологичность, навигация, упаковка' },
-        { id: 'delivery', title: 'Зоны доставки', desc: 'Центр, пригород, парки, порты' },
-        { id: 'calculator', title: 'Калькулятор', desc: 'Расчет стоимости доставки по формуле' },
-        { id: 'reviews', title: 'Отзывы', desc: 'Мнения клиентов о сервисе' }
-    ];
-
-    const searchModal = document.getElementById('searchModal');
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    const closeSearchBtn = document.getElementById('closeSearchBtn');
-    const searchFormClick = document.getElementById('searchFormClick');
-    
-    let currentResults = [];
-    let selectedIndex = -1;
-
-    function openSearch() {
-        searchModal.classList.add('active');
-        setTimeout(() => searchInput.focus(), 100);
-        currentResults = [];
-        selectedIndex = -1;
-        searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Начните вводить текст</div>';
-    }
-
-    function closeSearch() {
-        searchModal.classList.remove('active');
-        searchInput.value = '';
-    }
-
-    function performSearch() {
-        const query = searchInput.value.trim().toLowerCase();
-        
-        if (query.length < 2) {
-            searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Введите минимум 2 символа</div>';
-            return;
+            basePriceSpan.textContent = `${BASE_FEE} ₽`;
+            distancePriceSpan.textContent = `${Math.round(distanceCost)} ₽`;
+            weightPriceSpan.textContent = `${Math.round(weightCost)} ₽`;
+            subtotalSpan.textContent = `${Math.round(subtotal)} ₽`;
+            totalSpan.textContent = `${Math.round(total)} ₽`;
         }
-        
-        const results = [];
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            const title = section.querySelector('h2')?.innerText || '';
-            const text = section.innerText;
-            if (title.toLowerCase().includes(query) || text.toLowerCase().includes(query)) {
-                const id = section.id;
-                if (id) {
-                    results.push({ id: id, title: title, desc: text.substring(0, 100).replace(/\n/g, ' ') + '...' });
+
+        weightInput.addEventListener('input', calculatePrice);
+        distanceInput.addEventListener('input', calculatePrice);
+        timeSelect.addEventListener('change', calculatePrice);
+        weatherSelect.addEventListener('change', calculatePrice);
+        calculatePrice();
+
+        // ========== ПЛАВНЫЙ СКРОЛЛ ==========
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
+            });
+        });
+
+        document.getElementById('calcScrollBtn')?.addEventListener('click', () => {
+            document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        document.getElementById('orderBtn')?.addEventListener('click', () => alert('✅ Спасибо! Оператор свяжется с вами.'));
+
+        // ========== ПОИСК ==========
+        const searchDatabase = [
+            { id: 'home', title: 'Главная', desc: 'Доставка FPV-дронами, скорость 80 км/ч' },
+            { id: 'features', title: 'Преимущества', desc: 'Скорость, экологичность, навигация, упаковка' },
+            { id: 'delivery', title: 'Зоны доставки', desc: 'Центр, пригород, парки, порты' },
+            { id: 'calculator', title: 'Калькулятор', desc: 'Расчет стоимости доставки по формуле' },
+            { id: 'reviews', title: 'Отзывы', desc: 'Мнения клиентов о сервисе' }
+        ];
+
+        const searchModal = document.getElementById('searchModal');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const closeSearchBtn = document.getElementById('closeSearchBtn');
+        const searchFormClick = document.getElementById('searchFormClick');
+
+        let currentResults = [];
+        let selectedIndex = -1;
+
+        function openSearch() {
+            searchModal.classList.add('active');
+            setTimeout(() => searchInput.focus(), 100);
+            currentResults = [];
+            selectedIndex = -1;
+            searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Начните вводить текст</div>';
+        }
+
+        function closeSearch() {
+            searchModal.classList.remove('active');
+            searchInput.value = '';
+        }
+
+        function performSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            if (query.length < 2) {
+                searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Введите минимум 2 символа</div>';
+                return;
+            }
+            const results = [];
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const title = section.querySelector('h2')?.innerText || '';
+                const text = section.innerHTML;
+                if (title.toLowerCase().includes(query) || text.toLowerCase().includes(query)) {
+                    const id = section.id;
+                    if (id) {
+                        results.push({ id: id, title: title, desc: text.substring(0, 100).replace(/\n/g, ' ') +
+                            '...' });
+                    }
+                }
+            });
+            searchDatabase.forEach(item => {
+                const searchText = (item.title + ' ' + item.desc).toLowerCase();
+                if (searchText.includes(query) && !results.find(r => r.id === item.id)) {
+                    results.push(item);
+                }
+            });
+            currentResults = results.slice(0, 10);
+            selectedIndex = -1;
+
+            if (currentResults.length === 0) {
+                searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Ничего не найдено</div>';
+                return;
+            }
+
+            function highlightText(text, q) {
+                if (!q) return text;
+                const regex = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            searchResults.innerHTML = currentResults.map((result, idx) =>
+                `<div class="search-result-item" data-idx="${idx}" data-id="${result.id}">
+                    <div class="search-result-title">${highlightText(result.title, query)}</div>
+                    <div class="search-result-desc">${highlightText(result.desc.substring(0, 80), query)}</div>
+                </div>`
+            ).join('');
+
+            document.querySelectorAll('.search-result-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const id = el.dataset.id;
+                    if (id) {
+                        const element = document.getElementById(id);
+                        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        closeSearch();
+                    }
+                });
+            });
+        }
+
+        if (searchFormClick) searchFormClick.addEventListener('click', openSearch);
+        searchInput.addEventListener('input', performSearch);
+        closeSearchBtn.addEventListener('click', closeSearch);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && searchModal.classList.contains('active')) closeSearch();
+            if (e.key === '/' && !searchModal.classList.contains('active')) {
+                e.preventDefault();
+                openSearch();
             }
         });
-        
-        searchDatabase.forEach(item => {
-            const searchText = (item.title + ' ' + item.desc).toLowerCase();
-            if (searchText.includes(query) && !results.find(r => r.id === item.id)) {
-                results.push(item);
-            }
-        });
-        
-        currentResults = results.slice(0, 10);
-        selectedIndex = -1;
-        
-        if (currentResults.length === 0) {
-            searchResults.innerHTML = '<div class="no-results"><i class="fas fa-search"></i> Ничего не найдено</div>';
-            return;
-        }
-        
-        function highlightText(text, q) {
-            if (!q) return text;
-            const regex = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-            return text.replace(regex, '<span class="highlight">$1</span>');
-        }
-        
-        searchResults.innerHTML = currentResults.map((result, idx) => `
-            <div class="search-result-item" data-idx="${idx}" data-id="${result.id}">
-                <div class="search-result-title">${highlightText(result.title, query)}</div>
-                <div class="search-result-desc">${highlightText(result.desc.substring(0, 80), query)}</div>
-            </div>
-        `).join('');
-        
-        document.querySelectorAll('.search-result-item').forEach(el => {
-            el.addEventListener('click', () => {
-                const id = el.dataset.id;
+
+        searchInput.addEventListener('keydown', (e) => {
+            const items = document.querySelectorAll('.search-result-item');
+            if (items.length === 0) return;
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+                items.forEach((item, idx) => {
+                    item.style.background = idx === selectedIndex ? 'rgba(59, 75, 255, 0.25)' : '';
+                });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedIndex = Math.max(selectedIndex - 1, 0);
+                items.forEach((item, idx) => {
+                    item.style.background = idx === selectedIndex ? 'rgba(59, 75, 255, 0.25)' : '';
+                });
+            } else if (e.key === 'Enter' && selectedIndex >= 0) {
+                e.preventDefault();
+                const id = items[selectedIndex]?.dataset.id;
                 if (id) {
                     const element = document.getElementById(id);
                     if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     closeSearch();
                 }
-            });
+            }
         });
-    }
 
-    if (searchFormClick) searchFormClick.addEventListener('click', openSearch);
-    searchInput.addEventListener('input', performSearch);
-    closeSearchBtn.addEventListener('click', closeSearch);
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && searchModal.classList.contains('active')) closeSearch();
-        if (e.key === '/' && !searchModal.classList.contains('active')) {
-            e.preventDefault();
-            openSearch();
-        }
-    });
-    
-    searchInput.addEventListener('keydown', (e) => {
-        const items = document.querySelectorAll('.search-result-item');
-        if (items.length === 0) return;
-        
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
-            items.forEach((item, idx) => {
-                item.style.background = idx === selectedIndex ? 'rgba(59, 75, 255, 0.25)' : '';
-            });
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            selectedIndex = Math.max(selectedIndex - 1, 0);
-            items.forEach((item, idx) => {
-                item.style.background = idx === selectedIndex ? 'rgba(59, 75, 255, 0.25)' : '';
-            });
-        } else if (e.key === 'Enter' && selectedIndex >= 0) {
-            e.preventDefault();
-            const id = items[selectedIndex]?.dataset.id;
-            if (id) {
-                const element = document.getElementById(id);
-                if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                closeSearch();
+        searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeSearch(); });
+
+        // ========== АВТОРИЗАЦИЯ ==========
+        const STORAGE_KEY = 'skyslice_users';
+        const CURRENT_USER_KEY = 'skyslice_current_user';
+
+        function initUsers() {
+            if (!localStorage.getItem(STORAGE_KEY)) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify([
+                    { email: 'demo@skyslice.ru', password: 'demo123', name: 'Демо Пользователь' },
+                    { email: 'test@test.ru', password: '123456', name: 'Тестовый Аккаунт' }
+                ]));
             }
         }
-    });
-    
-    searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeSearch(); });
 
-    // ========== АВТОРИЗАЦИЯ ==========
-    const STORAGE_KEY = 'skyslice_users';
-    const CURRENT_USER_KEY = 'skyslice_current_user';
-
-    function initUsers() {
-        if (!localStorage.getItem(STORAGE_KEY)) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify([
-                { email: 'demo@skyslice.ru', password: 'demo123', name: 'Демо Пользователь' },
-                { email: 'test@test.ru', password: '123456', name: 'Тестовый Аккаунт' }
-            ]));
-        }
-    }
-
-    function checkAuth() {
-        const currentUser = localStorage.getItem(CURRENT_USER_KEY);
-        const headerAuthBlock = document.getElementById('headerAuthBlock');
-        const headerUserBlock = document.getElementById('headerUserBlock');
-        const headerUserName = document.getElementById('headerUserName');
-
-        if (currentUser) {
-            const user = JSON.parse(currentUser);
-            if (headerAuthBlock) headerAuthBlock.style.display = 'none';
-            if (headerUserBlock) {
-                headerUserBlock.style.display = 'block';
-                if (headerUserName) headerUserName.textContent = user.name || user.email.split('@')[0];
+        function checkAuth() {
+            const currentUser = localStorage.getItem(CURRENT_USER_KEY);
+            const headerAuthBlock = document.getElementById('headerAuthBlock');
+            const headerUserBlock = document.getElementById('headerUserBlock');
+            const headerUserName = document.getElementById('headerUserName');
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                if (headerAuthBlock) headerAuthBlock.style.display = 'none';
+                if (headerUserBlock) {
+                    headerUserBlock.style.display = 'block';
+                    if (headerUserName) headerUserName.textContent = user.name || user.email.split('@')[0];
+                }
+            } else {
+                if (headerAuthBlock) headerAuthBlock.style.display = 'block';
+                if (headerUserBlock) headerUserBlock.style.display = 'none';
             }
-        } else {
-            if (headerAuthBlock) headerAuthBlock.style.display = 'block';
-            if (headerUserBlock) headerUserBlock.style.display = 'none';
         }
-    }
 
-    function logout() {
-        localStorage.removeItem(CURRENT_USER_KEY);
-        checkAuth();
-        alert('Вы вышли из аккаунта');
-    }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            checkAuth();
+            alert('Вы вышли из аккаунта');
+        }
 
-    function login(email, password) {
-        const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        const user = users.find(u => u.email === email && u.password === password);
-        if (user) {
-            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+        function login(email, password) {
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+                checkAuth();
+                closeAuthModal();
+                alert(`Добро пожаловать, ${user.name || user.email}!`);
+                return true;
+            } else {
+                showError('Неверный email или пароль');
+                return false;
+            }
+        }
+
+        function register(email, password) {
+            const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            if (users.find(u => u.email === email)) {
+                showError('Пользователь уже существует');
+                return false;
+            }
+            const newUser = { email, password, name: email.split('@')[0] };
+            users.push(newUser);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(newUser));
             checkAuth();
             closeAuthModal();
-            alert(`Добро пожаловать, ${user.name || user.email}!`);
+            alert('Регистрация успешна! Добро пожаловать!');
             return true;
-        } else {
-            showError('Неверный email или пароль');
-            return false;
         }
-    }
 
-    function register(email, password) {
-        const users = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        if (users.find(u => u.email === email)) {
-            showError('Пользователь уже существует');
-            return false;
+        function showError(msg) {
+            const errorDiv = document.getElementById('errorMsg');
+            if (errorDiv) {
+                errorDiv.textContent = msg;
+                errorDiv.style.display = 'block';
+                setTimeout(() => errorDiv.style.display = 'none', 3000);
+            }
         }
-        const newUser = { email, password, name: email.split('@')[0] };
-        users.push(newUser);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
-        localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(newUser));
+
+        const authModal = document.getElementById('authModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const submitAuthBtn = document.getElementById('submitAuthBtn');
+        const switchLink = document.getElementById('switchToRegister');
+        const loginEmail = document.getElementById('loginEmail');
+        const loginPassword = document.getElementById('loginPassword');
+
+        let isLoginMode = true;
+
+        function openAuthModal(mode = 'login') {
+            isLoginMode = mode === 'login';
+            if (modalTitle) modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
+            if (submitAuthBtn) submitAuthBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+            if (switchLink) switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
+            if (loginEmail) loginEmail.value = '';
+            if (loginPassword) loginPassword.value = '';
+            const errorDiv = document.getElementById('errorMsg');
+            if (errorDiv) errorDiv.style.display = 'none';
+            if (authModal) authModal.style.display = 'flex';
+        }
+
+        function closeAuthModal() {
+            if (authModal) authModal.style.display = 'none';
+        }
+
+        function handleAuth() {
+            const email = loginEmail?.value.trim() || '';
+            const password = loginPassword?.value.trim() || '';
+            if (!email || !password) {
+                showError('Заполните все поля');
+                return;
+            }
+            if (isLoginMode) {
+                login(email, password);
+            } else {
+                register(email, password);
+            }
+        }
+
+        document.getElementById('headerLoginBtn')?.addEventListener('click', () => openAuthModal('login'));
+        document.getElementById('headerRegisterBtn')?.addEventListener('click', () => openAuthModal('register'));
+        document.getElementById('headerLogoutBtn')?.addEventListener('click', logout);
+        document.querySelector('.close-modal')?.addEventListener('click', closeAuthModal);
+        submitAuthBtn?.addEventListener('click', handleAuth);
+        switchLink?.addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            if (modalTitle) modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
+            if (submitAuthBtn) submitAuthBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+            if (switchLink) switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
+            const errorDiv = document.getElementById('errorMsg');
+            if (errorDiv) errorDiv.style.display = 'none';
+        });
+        authModal?.addEventListener('click', (e) => { if (e.target === authModal) closeAuthModal(); });
+        loginEmail?.addEventListener('keypress', (e) => { if (e.key === 'Enter') loginPassword?.focus(); });
+        loginPassword?.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleAuth(); });
+
+        initUsers();
         checkAuth();
-        closeAuthModal();
-        alert(`Регистрация успешна! Добро пожаловать!`);
-        return true;
-    }
 
-    function showError(msg) {
-        const errorDiv = document.getElementById('errorMsg');
-        if (errorDiv) {
-            errorDiv.textContent = msg;
-            errorDiv.style.display = 'block';
-            setTimeout(() => errorDiv.style.display = 'none', 3000);
+        // ========== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ ==========
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const lang = btn.dataset.lang;
+                if (lang === 'en') {
+                    alert('English version in development / Английская версия в разработке');
+                }
+            });
+        });
+
+        // ========== ШТОРКА ПЕРЕВОЗЧИКОВ ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const carrierPanel = document.getElementById('carrierPanel');
+        const carrierClose = document.getElementById('carrierClose');
+        const panelOverlay = document.getElementById('panelOverlay');
+        const carrierBtns = document.querySelectorAll('.carrier-btn');
+
+        function toggleCarrierPanel() {
+            carrierPanel.classList.toggle('open');
+            panelOverlay.classList.toggle('active');
+            if (carrierPanel.classList.contains('open')) {
+                menuToggle.innerHTML = `
+                    <span class="bar" style="transform: rotate(45deg) translate(5px, 5px);"></span>
+                    <span class="bar" style="opacity: 0;"></span>
+                    <span class="bar" style="transform: rotate(-45deg) translate(5px, -5px);"></span>
+                `;
+            } else {
+                menuToggle.innerHTML = `
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                `;
+            }
         }
-    }
 
-    const authModal = document.getElementById('authModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const submitAuthBtn = document.getElementById('submitAuthBtn');
-    const switchLink = document.getElementById('switchToRegister');
-    const loginEmail = document.getElementById('loginEmail');
-    const loginPassword = document.getElementById('loginPassword');
-    let isLoginMode = true;
-
-    function openAuthModal(mode = 'login') {
-        isLoginMode = mode === 'login';
-        if (modalTitle) modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
-        if (submitAuthBtn) submitAuthBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
-        if (switchLink) switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
-        if (loginEmail) loginEmail.value = '';
-        if (loginPassword) loginPassword.value = '';
-        const errorDiv = document.getElementById('errorMsg');
-        if (errorDiv) errorDiv.style.display = 'none';
-        if (authModal) authModal.style.display = 'flex';
-    }
-
-    function closeAuthModal() {
-        if (authModal) authModal.style.display = 'none';
-    }
-
-    function handleAuth() {
-        const email = loginEmail?.value.trim() || '';
-        const password = loginPassword?.value.trim() || '';
-        if (!email || !password) {
-            showError('Заполните все поля');
-            return;
+        function closeCarrierPanel() {
+            carrierPanel.classList.remove('open');
+            panelOverlay.classList.remove('active');
+            menuToggle.innerHTML = `
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            `;
         }
-        if (isLoginMode) login(email, password);
-        else register(email, password);
-    }
 
-    document.getElementById('headerLoginBtn')?.addEventListener('click', () => openAuthModal('login'));
-    document.getElementById('headerRegisterBtn')?.addEventListener('click', () => openAuthModal('register'));
-    document.getElementById('headerLogoutBtn')?.addEventListener('click', logout);
-    document.querySelector('.close-modal')?.addEventListener('click', closeAuthModal);
-    submitAuthBtn?.addEventListener('click', handleAuth);
-    switchLink?.addEventListener('click', () => {
-        isLoginMode = !isLoginMode;
-        if (modalTitle) modalTitle.textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
-        if (submitAuthBtn) submitAuthBtn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
-        if (switchLink) switchLink.textContent = isLoginMode ? 'Зарегистрироваться' : 'Войти';
-        const errorDiv = document.getElementById('errorMsg');
-        if (errorDiv) errorDiv.style.display = 'none';
-    });
-    authModal?.addEventListener('click', (e) => { if (e.target === authModal) closeAuthModal(); });
-    loginEmail?.addEventListener('keypress', (e) => { if (e.key === 'Enter') loginPassword?.focus(); });
-    loginPassword?.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleAuth(); });
+        menuToggle.addEventListener('click', toggleCarrierPanel);
+        carrierClose.addEventListener('click', closeCarrierPanel);
+        panelOverlay.addEventListener('click', closeCarrierPanel);
 
-    initUsers();
-    checkAuth();
+        carrierBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                carrierBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
 
-    // ========== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ ==========
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const lang = btn.dataset.lang;
-            if (lang === 'en') {
-                alert('English version in development / Английская версия в разработке');
+                const carrier = this.dataset.carrier;
+                let message = '';
+
+                switch (carrier) {
+                    case 'sdek':
+                        message = 'Выбран перевозчик: СДЭК. Доставка по всей России.';
+                        break;
+                    case 'ozon':
+                        message = 'Выбран перевозчик: Ozon. Быстрая доставка заказов.';
+                        break;
+                    case 'fesco':
+                        message = 'Выбран перевозчик: FESCO. Морские и мультимодальные перевозки.';
+                        break;
+                    case 'yandex':
+                        message = 'Выбран перевозчик: Яндекс. Курьерская доставка по городу.';
+                        break;
+                    case 'skyslice':
+                        message = 'Выбран перевозчик: SkySlice FPV. Экспресс-доставка дронами!';
+                        break;
+                    default:
+                        message = `Выбран перевозчик: ${carrier}`;
+                }
+
+                alert(`✅ ${message}`);
+
+                closeCarrierPanel();
+            });
+        });
+
+        // ========== КАРТА ==========
+        let mapInitialized = false;
+        let map = null;
+        let markers = [];
+
+        // Данные станций (хабов) для дронов
+        const droneStations = [
+            { lat: 55.751244, lng: 37.618423, name: 'Центральный хаб', desc: 'Москва, центр города' },
+            { lat: 55.736917, lng: 37.592121, name: 'Южный хаб', desc: 'Москва, ЮАО' },
+            { lat: 55.791746, lng: 37.687846, name: 'Восточный хаб', desc: 'Москва, ВАО' },
+            { lat: 55.765018, lng: 37.547722, name: 'Западный хаб', desc: 'Москва, ЗАО' },
+            { lat: 55.820154, lng: 37.611180, name: 'Северный хаб', desc: 'Москва, САО' },
+            { lat: 55.604143, lng: 37.534326, name: 'Портовый терминал', desc: 'Москва, порт' },
+            { lat: 55.698972, lng: 37.466233, name: 'Зарядный хаб "Энергия"', desc: 'Москва, зарядная станция' }
+        ];
+
+        function initMap() {
+            if (mapInitialized) return;
+
+            map = L.map('droneMap', {
+                center: [55.751244, 37.618423],
+                zoom: 12,
+                zoomControl: false,
+                attributionControl: false
+            });
+
+            // Тёмный стиль карты
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap &copy; CartoDB'
+            }).addTo(map);
+
+            // Иконка дрона (свой вариант)
+            const droneIcon = L.divIcon({
+                className: 'custom-drone-icon',
+                html: '<i class="fas fa-drone" style="color:#3b4bff;font-size:24px;text-shadow:0 0 10px rgba(59,75,255,0.5);"></i>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+
+            // Добавляем станции
+            droneStations.forEach(station => {
+                const marker = L.marker([station.lat, station.lng], { icon: droneIcon })
+                    .bindPopup(`
+                        <div style="text-align:center;min-width:150px;">
+                            <strong style="color:#6c7eff;font-size:1.1rem;">${station.name}</strong><br>
+                            <span style="color:#99a4d4;">${station.desc}</span><br>
+                            <span style="color:#3b4bff;font-size:0.8rem;margin-top:5px;display:block;">
+                                <i class="fas fa-check-circle"></i> Прием дронов
+                            </span>
+                        </div>
+                    `);
+                marker.addTo(map);
+                markers.push(marker);
+            });
+
+            // Добавляем кнопку зума
+            L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+            mapInitialized = true;
+
+            // Через небольшую задержку корректируем размер
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 300);
+        }
+
+        // Обработка клика по карте (развернуть/свернуть)
+        const mapWrapper = document.getElementById('mapWrapper');
+
+        mapWrapper.addEventListener('click', function() {
+            this.classList.toggle('expanded');
+
+            if (!mapInitialized) {
+                initMap();
+            } else {
+                // Перерисовываем карту при изменении размера
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 300);
             }
         });
-    });
-</script>
+
+        // Инициализация карты после загрузки страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Карта инициализируется при первом клике
+        });
+
+        // Если пользователь на мобильном устройстве - автоматически инициализируем
+        if (window.innerWidth < 768) {
+            setTimeout(() => {
+                initMap();
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 500);
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
