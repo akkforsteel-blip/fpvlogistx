@@ -518,33 +518,203 @@
             margin-right: 8px;
             color: #6c7eff;
         }
-        .reviews {
+
+        /* ===== КАРУСЕЛЬ ОТЗЫВОВ (Кольцо Сатурна) ===== */
+        .reviews-carousel {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+            overflow: hidden;
+        }
+        .reviews-track-container {
+            overflow: hidden;
+            border-radius: 40px;
+            position: relative;
+        }
+        .reviews-track {
             display: flex;
-            flex-wrap: wrap;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             gap: 30px;
-            justify-content: center;
+            padding: 20px 10px;
         }
         .review-card {
-            background: rgba(20, 24, 42, 0.7);
-            backdrop-filter: blur(4px);
+            background: rgba(20, 24, 42, 0.8);
+            backdrop-filter: blur(12px);
             border-radius: 32px;
-            padding: 30px;
+            padding: 32px 28px;
+            min-width: 320px;
             max-width: 350px;
-            border: 1px solid #2d3255;
-            text-align: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(59, 75, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
-        .stars {
+        .review-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #3b4bff;
+            box-shadow: 0 15px 40px rgba(59, 75, 255, 0.2);
+        }
+        .review-card .stars {
             color: #ffb83b;
             margin-bottom: 16px;
             font-size: 1.2rem;
+            letter-spacing: 2px;
         }
-        .review-card p {
-            margin-bottom: 16px;
+        .review-card .review-text {
+            margin-bottom: 20px;
             color: #ccd6f6;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            min-height: 80px;
         }
-        .review-card h4 {
+        .review-card .review-author {
+            color: #6c7eff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .review-card .review-author i {
+            font-size: 1.2rem;
+        }
+        .review-card .review-date {
+            font-size: 0.7rem;
+            color: #6c7eff;
+            opacity: 0.6;
+        }
+        .review-card .verified-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(59, 75, 255, 0.2);
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 0.65rem;
             color: #6c7eff;
         }
+        .review-card .verified-badge i {
+            margin-right: 4px;
+            font-size: 0.6rem;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(59, 75, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(59, 75, 255, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+            color: white;
+            font-size: 1.3rem;
+        }
+        .carousel-btn:hover {
+            background: #3b4bff;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(59, 75, 255, 0.5);
+        }
+        .carousel-btn.prev {
+            left: -20px;
+        }
+        .carousel-btn.next {
+            right: -20px;
+        }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(59, 75, 255, 0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .carousel-dot.active {
+            background: #3b4bff;
+            width: 28px;
+            border-radius: 10px;
+        }
+        .carousel-dot:hover {
+            background: #6c7eff;
+        }
+        .rating-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .rating-big {
+            text-align: center;
+        }
+        .rating-big .score {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #ffb83b;
+            line-height: 1;
+        }
+        .rating-big .max {
+            font-size: 1.5rem;
+            color: #99a4d4;
+        }
+        .rating-big .stars-big {
+            font-size: 1.3rem;
+            color: #ffb83b;
+            margin: 8px 0;
+        }
+        .rating-big .count {
+            color: #99a4d4;
+            font-size: 0.9rem;
+        }
+        .rating-bars {
+            flex: 1;
+            max-width: 300px;
+        }
+        .rating-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .rating-bar-item .star-label {
+            width: 40px;
+            font-size: 0.8rem;
+            color: #ffb83b;
+        }
+        .rating-bar-item .bar-bg {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .rating-bar-item .bar-fill {
+            height: 100%;
+            background: #ffb83b;
+            border-radius: 10px;
+            width: 0%;
+        }
+        .rating-bar-item .percent {
+            width: 35px;
+            font-size: 0.8rem;
+            color: #99a4d4;
+        }
+
         footer {
             border-top: 1px solid #1f233e;
             padding: 48px 0 24px;
@@ -880,7 +1050,7 @@
             display: block;
         }
 
-        /* ===== НОВАЯ КАРТА ===== */
+        /* ===== КАРТА ===== */
         .map-wrapper {
             position: relative;
             width: 100%;
@@ -889,7 +1059,6 @@
             border-radius: 32px;
             overflow: hidden;
             border: 1px solid rgba(59, 75, 255, 0.3);
-            cursor: pointer;
             transition: all 0.3s ease;
             height: 300px;
         }
@@ -945,7 +1114,230 @@
             transform: rotate(180deg);
         }
 
-        /* Leaflet Custom Styles */
+        /* ===== ЧАТ-ВИДЖЕТ ===== */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 300;
+        }
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b4bff, #6c7eff);
+            border: none;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(59, 75, 255, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .chat-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(59, 75, 255, 0.6);
+        }
+        .chat-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: linear-gradient(145deg, #0e1120, #070914);
+            border-radius: 24px;
+            border: 1px solid rgba(59, 75, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .chat-window.hidden {
+            display: none;
+        }
+        .chat-header {
+            background: rgba(59, 75, 255, 0.2);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(59, 75, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h3 {
+            font-size: 1rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chat-header h3 i {
+            color: #6c7eff;
+        }
+        .chat-status {
+            font-size: 0.7rem;
+            color: #4caf50;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .chat-status i {
+            font-size: 0.6rem;
+        }
+        .close-chat {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+        .close-chat:hover {
+            color: white;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message {
+            display: flex;
+            gap: 10px;
+            max-width: 85%;
+            animation: fadeIn 0.3s ease;
+        }
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .message.bot {
+            align-self: flex-start;
+        }
+        .message-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(59, 75, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .message.user .message-avatar {
+            background: #3b4bff;
+        }
+        .message-content {
+            background: rgba(27, 31, 50, 0.8);
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        .message.user .message-content {
+            background: #3b4bff;
+            border-bottom-right-radius: 4px;
+        }
+        .message.bot .message-content {
+            border-bottom-left-radius: 4px;
+        }
+        .chat-typing {
+            background: rgba(27, 31, 50, 0.8);
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .chat-typing span {
+            width: 6px;
+            height: 6px;
+            background: #6c7eff;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        .chat-typing span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .chat-typing span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-6px);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .chat-input-area {
+            padding: 15px;
+            border-top: 1px solid rgba(59, 75, 255, 0.2);
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 10px 15px;
+            background: #1b1f32;
+            border: 1px solid #2f3557;
+            border-radius: 40px;
+            color: white;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .chat-input-area input:focus {
+            border-color: #3b4bff;
+        }
+        .chat-input-area button {
+            background: #3b4bff;
+            border: none;
+            border-radius: 40px;
+            padding: 0 18px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chat-input-area button:hover {
+            background: #5f6eff;
+        }
+        .chat-suggestions {
+            padding: 10px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-top: 1px solid rgba(59, 75, 255, 0.1);
+        }
+        .suggestion-chip {
+            background: rgba(59, 75, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .suggestion-chip:hover {
+            background: rgba(59, 75, 255, 0.3);
+        }
+
         .leaflet-popup-content-wrapper {
             background: #1b1f32;
             color: white;
@@ -1036,10 +1428,30 @@
                 left: 0;
             }
             .map-wrapper {
-                height: 200px;
+                height: 250px;
             }
             .map-wrapper.expanded {
-                height: 350px;
+                height: 400px;
+            }
+            .chat-window {
+                width: 320px;
+                height: 450px;
+                right: -10px;
+            }
+            .review-card {
+                min-width: 280px;
+                padding: 24px 20px;
+            }
+            .carousel-btn.prev {
+                left: -10px;
+            }
+            .carousel-btn.next {
+                right: -10px;
+            }
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
         }
         button {
@@ -1060,33 +1472,66 @@
     <!-- ===== ОВЕРЛЕЙ ===== -->
     <div class="panel-overlay" id="panelOverlay"></div>
 
-    <!-- ===== ШТОРКА ПЕРЕВОЗЧИКОВ ===== -->
-    <div class="carrier-panel" id="carrierPanel">
-        <div class="carrier-panel-header">
-            <h3><i class="fas fa-shipping-fast"></i> Перевозчики</h3>
-            <button class="carrier-close" id="carrierClose">&times;</button>
-        </div>
-        <div class="carrier-list">
-            <button class="carrier-btn" data-carrier="sdek">
-                <i class="fas fa-box"></i> СДЭК
-                <span class="check"><i class="fas fa-check-circle"></i></span>
-            </button>
-            <button class="carrier-btn" data-carrier="ozon">
-                <i class="fas fa-shopping-bag"></i> Ozon
-                <span class="check"><i class="fas fa-check-circle"></i></span>
-            </button>
-            <button class="carrier-btn" data-carrier="fesco">
-                <i class="fas fa-ship"></i> FESCO
-                <span class="check"><i class="fas fa-check-circle"></i></span>
-            </button>
-            <button class="carrier-btn" data-carrier="yandex">
-                <i class="fas fa-map-pin"></i> Яндекс
-                <span class="check"><i class="fas fa-check-circle"></i></span>
-            </button>
-            <button class="carrier-btn active" data-carrier="skyslice" id="skysliceCarrierBtn">
-                <i class="fas fa-drone"></i> SkySlice (FPV)
-                <span class="check"><i class="fas fa-check-circle"></i></span>
-            </button>
+    <!-- ===== ШТОРКА ПОСРЕДНИКОВ ===== -->
+<div class="carrier-panel" id="carrierPanel">
+    <div class="carrier-panel-header">
+        <h3><i class="fas fa-handshake"></i> Посредники</h3>
+        <button class="carrier-close" id="carrierClose">&times;</button>
+    </div>
+    <div class="carrier-list">
+        <button class="carrier-btn" data-carrier="sdek">
+            <i class="fas fa-box"></i> СДЭК
+            <span class="check"><i class="fas fa-check-circle"></i></span>
+        </button>
+        <button class="carrier-btn" data-carrier="ozon">
+            <i class="fas fa-shopping-bag"></i> Ozon
+            <span class="check"><i class="fas fa-check-circle"></i></span>
+        </button>
+        <button class="carrier-btn" data-carrier="avito">
+            <i class="fas fa-tag"></i> Авито
+            <span class="check"><i class="fas fa-check-circle"></i></span>
+        </button>
+        <button class="carrier-btn" data-carrier="yandex">
+            <i class="fas fa-map-pin"></i> Яндекс
+            <span class="check"><i class="fas fa-check-circle"></i></span>
+        </button>
+        <button class="carrier-btn active" data-carrier="skyslice">
+            <i class="fas fa-drone"></i> SkySlice (FPV)
+            <span class="check"><i class="fas fa-check-circle"></i></span>
+        </button>
+    </div>
+</div>
+    <!-- ===== ЧАТ-ВИДЖЕТ С ИИ ===== -->
+    <div class="chat-widget">
+        <button class="chat-toggle" id="chatToggle">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div class="chat-window hidden" id="chatWindow">
+            <div class="chat-header">
+                <h3><i class="fas fa-robot"></i> SkySlice AI Ассистент</h3>
+                <div class="chat-status">
+                    <i class="fas fa-circle"></i> Онлайн
+                </div>
+                <button class="close-chat" id="closeChatBtn">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="message-content">
+                        Привет! 👋 Я AI-ассистент SkySliceLogistX. Задавайте любые вопросы о доставке дронами, калькуляторе, зонах покрытия или оформите заказ!
+                    </div>
+                </div>
+            </div>
+            <div class="chat-suggestions">
+                <div class="suggestion-chip" data-suggestion="Сколько стоит доставка?">💰 Стоимость</div>
+                <div class="suggestion-chip" data-suggestion="Какие зоны покрытия?">🗺️ Зоны покрытия</div>
+                <div class="suggestion-chip" data-suggestion="Как отследить заказ?">📦 Трекинг</div>
+                <div class="suggestion-chip" data-suggestion="Хочу оформить заказ">📝 Заказать</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Напишите сообщение...">
+                <button id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
         </div>
     </div>
 
@@ -1230,7 +1675,6 @@
                     <div class="zone-item"><i class="fas fa-charging-station"></i> Зарядные хабы</div>
                 </div>
 
-                <!-- ===== НОВАЯ КАРТА ===== -->
                 <div class="map-wrapper" id="mapWrapper">
                     <div id="droneMap"></div>
                     <div class="map-hint"><i class="fas fa-hand-pointer"></i> Нажмите, чтобы развернуть</div>
@@ -1308,22 +1752,52 @@
         <section id="reviews">
             <div class="container section-container">
                 <h2 class="section-title">Клиенты о нас</h2>
-                <div class="reviews">
-                    <div class="review-card">
-                        <div class="stars">★★★★★</div>
-                        <p>"FPV дрон доставил документы за 12 минут!"</p>
-                        <h4>— Анна К.</h4>
+                <p class="section-sub">Более 10 000 довольных клиентов по всей России</p>
+                
+                <!-- Статистика рейтингов -->
+                <div class="rating-stats">
+                    <div class="rating-big">
+                        <div class="score">4.8 <span class="max">/5</span></div>
+                        <div class="stars-big">★★★★★</div>
+                        <div class="count">на основе 10 284 отзывов</div>
                     </div>
-                    <div class="review-card">
-                        <div class="stars">★★★★☆</div>
-                        <p>"Надежно, быстро, трекинг в реальном времени."</p>
-                        <h4>— Дмитрий В.</h4>
+                    <div class="rating-bars">
+                        <div class="rating-bar-item">
+                            <div class="star-label">5 ★</div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 78%"></div></div>
+                            <div class="percent">78%</div>
+                        </div>
+                        <div class="rating-bar-item">
+                            <div class="star-label">4 ★</div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 15%"></div></div>
+                            <div class="percent">15%</div>
+                        </div>
+                        <div class="rating-bar-item">
+                            <div class="star-label">3 ★</div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 4%"></div></div>
+                            <div class="percent">4%</div>
+                        </div>
+                        <div class="rating-bar-item">
+                            <div class="star-label">2 ★</div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 2%"></div></div>
+                            <div class="percent">2%</div>
+                        </div>
+                        <div class="rating-bar-item">
+                            <div class="star-label">1 ★</div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 1%"></div></div>
+                            <div class="percent">1%</div>
+                        </div>
                     </div>
-                    <div class="review-card">
-                        <div class="stars">★★★★★</div>
-                        <p>"Клиенты в восторге! Спасибо за сервис!"</p>
-                        <h4>— Елена П.</h4>
+                </div>
+
+                <!-- Карусель отзывов (кольцо Сатурна) -->
+                <div class="reviews-carousel">
+                    <button class="carousel-btn prev" id="reviewsPrevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="reviews-track-container">
+                        <div class="reviews-track" id="reviewsTrack"></div>
                     </div>
+                    <button class="carousel-btn next" id="reviewsNextBtn"><i class="fas fa-chevron-right"></i></button>
+                    <div class="carousel-dots" id="reviewsDots"></div>
                 </div>
             </div>
         </section>
@@ -1338,7 +1812,7 @@
                 </div>
                 <div>
                     <h4>Контакты</h4>
-                    <p><i class="fas fa-phone-alt"></i> +7 (495) 123-45-67</p>
+                    <p><i class="fas fa-phone-alt"></i> +7 (924) 685-18-45</p>
                     <p><i class="fas fa-envelope"></i> skyslicelogistix@gmail.com</p>
                 </div>
             </div>
@@ -1350,6 +1824,123 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
+        // ========== ОТЗЫВЫ (БОЛЬШАЯ БАЗА + КАРУСЕЛЬ) ==========
+        const reviewsData = [
+            { name: "Анна Ковалева", date: "15 марта 2026", rating: 5, text: "FPV дрон доставил документы за 12 минут! Это просто невероятно. Раньше курьер ехал 40 минут, а тут — и глазом моргнуть не успела. Очень довольна сервисом!", verified: true, avatar: "AK" },
+            { name: "Дмитрий Волков", date: "12 марта 2026", rating: 5, text: "Надежно, быстро, трекинг в реальном времени. Смотрел как дрон летит по карте — это вау-эффект! Доставка четко по расписанию.", verified: true, avatar: "ДВ" },
+            { name: "Елена Петрова", date: "10 марта 2026", rating: 5, text: "Клиенты в восторге! Заказала доставку цветов, дрон прилетел через 15 минут. Цветы свежие, упаковка целая. Спасибо за сервис!", verified: true, avatar: "ЕП" },
+            { name: "Максим Орлов", date: "8 марта 2026", rating: 4, text: "Отличная доставка, единственное — в дождь пришлось подождать 25 минут вместо 15. Но это погода, не к вам претензии. В целом круто!", verified: true, avatar: "МО" },
+            { name: "Татьяна Морозова", date: "5 марта 2026", rating: 5, text: "Поразительно! Заказала ужин в ресторане, доставили за 8 минут горячим. Дрон прилетел прямо к окну. Буду заказывать постоянно!", verified: true, avatar: "ТМ" },
+            { name: "Сергей Иванов", date: "2 марта 2026", rating: 5, text: "Отправил посылку с документами в другой конец города. Дрон прилетел через 14 минут. Получатель очень удивился. Рекомендую всем бизнесменам!", verified: true, avatar: "СИ" },
+            { name: "Ольга Смирнова", date: "28 февраля 2026", rating: 5, text: "Впервые видела дрон с посылкой — это фантастика! Ребенок был в полном восторге. Доставка лекарств заняла 6 минут. Спасибо, что спасли ситуацию!", verified: true, avatar: "ОС" },
+            { name: "Алексей Федоров", date: "25 февраля 2026", rating: 4, text: "Хороший сервис, но хотелось бы больше зон покрытия. В мой район пока не доставляют, пришлось встречать на парковке. Но сам дрон — топ!", verified: true, avatar: "АФ" },
+            { name: "Наталья Кузнецова", date: "22 февраля 2026", rating: 5, text: "Заказала подарок другу на день рождения. Дрон прилетел с воздушными шариками! Друг был в шоке в хорошем смысле. Спасибо за креатив!", verified: true, avatar: "НК" },
+            { name: "Владимир Соколов", date: "20 февраля 2026", rating: 5, text: "Использую для доставки запчастей в сервисный центр. Экономия времени — колоссальная. Раньше терял час на дорогу, теперь 10 минут и все на месте.", verified: true, avatar: "ВС" },
+            { name: "Ирина Лебедева", date: "18 февраля 2026", rating: 5, text: "Дрон прилетел с кофе и круассаном — горячими! Удивительная технология. Буду рекомендовать друзьям и коллегам.", verified: true, avatar: "ИЛ" },
+            { name: "Павел Новиков", date: "15 февраля 2026", rating: 5, text: "Отличная альтернатива курьерам. Дрон не стоит в пробках, не опаздывает. За 2 недели заказал 7 раз — ни одного сбоя!", verified: true, avatar: "ПН" },
+            { name: "Светлана Васильева", date: "12 февраля 2026", rating: 4, text: "Очень удобно. Жаль только, что максимальный вес 5 кг. Но для документов и небольших товаров — идеально. Спасибо!", verified: true, avatar: "СВ" },
+            { name: "Андрей Титов", date: "10 февраля 2026", rating: 5, text: "FPV дрон — это реально технология будущего. Скорость, маневренность, точность посадки. Весь процесс можно смотреть в приложении. Восторг!", verified: true, avatar: "АТ" },
+            { name: "Марина Егорова", date: "8 февраля 2026", rating: 5, text: "Заказывала срочно конверт с документами. Дрон прилетел через 9 минут. Сэкономила кучу нервов и времени. Лучший сервис доставки!", verified: true, avatar: "МЕ" }
+        ];
+
+        let currentIndex = 0;
+        let visibleCards = 3;
+        let cardWidth = 0;
+        let trackElement = document.getElementById('reviewsTrack');
+        let dotsContainer = document.getElementById('reviewsDots');
+
+        function updateVisibleCards() {
+            if (window.innerWidth <= 768) {
+                visibleCards = 1;
+            } else if (window.innerWidth <= 1024) {
+                visibleCards = 2;
+            } else {
+                visibleCards = 3;
+            }
+        }
+
+        function createReviewCard(review) {
+            const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+            const starColor = review.rating === 5 ? '#ffb83b' : review.rating === 4 ? '#ffb83b' : '#ffa500';
+            
+            return `
+                <div class="review-card">
+                    <div class="verified-badge">
+                        <i class="fas fa-check-circle"></i> Подтверждён
+                    </div>
+                    <div class="stars" style="color: ${starColor};">${stars}</div>
+                    <div class="review-text">"${review.text}"</div>
+                    <div class="review-author">
+                        <i class="fas fa-user-circle"></i> ${review.name}
+                    </div>
+                    <div class="review-date">
+                        <i class="fas fa-calendar-alt"></i> ${review.date}
+                    </div>
+                </div>
+            `;
+        }
+
+        function createDots() {
+            const totalPages = Math.ceil(reviewsData.length / visibleCards);
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalPages; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (i === currentIndex) dot.classList.add('active');
+                dot.addEventListener('click', () => goToPage(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateCarousel() {
+            updateVisibleCards();
+            const totalPages = Math.ceil(reviewsData.length / visibleCards);
+            
+            if (currentIndex >= totalPages) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = totalPages - 1;
+            
+            // Создаем расширенный массив для бесконечной прокрутки (эффект кольца)
+            const start = currentIndex * visibleCards;
+            const end = start + visibleCards;
+            const visibleReviews = reviewsData.slice(start, end);
+            
+            trackElement.innerHTML = visibleReviews.map(review => createReviewCard(review)).join('');
+            
+            // Обновляем точки
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            const totalPages = Math.ceil(reviewsData.length / visibleCards);
+            currentIndex = (currentIndex + 1) % totalPages;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            const totalPages = Math.ceil(reviewsData.length / visibleCards);
+            currentIndex = (currentIndex - 1 + totalPages) % totalPages;
+            updateCarousel();
+        }
+
+        function goToPage(page) {
+            currentIndex = page;
+            updateCarousel();
+        }
+
+        // Обработчики
+        document.getElementById('reviewsNextBtn').addEventListener('click', nextSlide);
+        document.getElementById('reviewsPrevBtn').addEventListener('click', prevSlide);
+        
+        window.addEventListener('resize', () => {
+            updateCarousel();
+        });
+
+        // Инициализация карусели
+        updateCarousel();
+
         // ========== КАЛЬКУЛЯТОР ==========
         const weightInput = document.getElementById('weight');
         const distanceInput = document.getElementById('distance');
@@ -1460,8 +2051,7 @@
                 if (title.toLowerCase().includes(query) || text.toLowerCase().includes(query)) {
                     const id = section.id;
                     if (id) {
-                        results.push({ id: id, title: title, desc: text.substring(0, 100).replace(/\n/g, ' ') +
-                            '...' });
+                        results.push({ id: id, title: title, desc: text.substring(0, 100).replace(/\n/g, ' ') + '...' });
                     }
                 }
             });
@@ -1770,7 +2360,6 @@
         let map = null;
         let markers = [];
 
-        // Данные станций (хабов) для дронов
         const droneStations = [
             { lat: 55.751244, lng: 37.618423, name: 'Центральный хаб', desc: 'Москва, центр города' },
             { lat: 55.736917, lng: 37.592121, name: 'Южный хаб', desc: 'Москва, ЮАО' },
@@ -1791,12 +2380,10 @@
                 attributionControl: false
             });
 
-            // Тёмный стиль карты
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; OpenStreetMap &copy; CartoDB'
             }).addTo(map);
 
-            // Иконка дрона (свой вариант)
             const droneIcon = L.divIcon({
                 className: 'custom-drone-icon',
                 html: '<i class="fas fa-drone" style="color:#3b4bff;font-size:24px;text-shadow:0 0 10px rgba(59,75,255,0.5);"></i>',
@@ -1804,7 +2391,6 @@
                 iconAnchor: [15, 15]
             });
 
-            // Добавляем станции
             droneStations.forEach(station => {
                 const marker = L.marker([station.lat, station.lng], { icon: droneIcon })
                     .bindPopup(`
@@ -1820,47 +2406,143 @@
                 markers.push(marker);
             });
 
-            // Добавляем кнопку зума
             L.control.zoom({ position: 'bottomright' }).addTo(map);
 
             mapInitialized = true;
 
-            // Через небольшую задержку корректируем размер
             setTimeout(() => {
                 map.invalidateSize();
-            }, 300);
+            }, 100);
         }
 
-        // Обработка клика по карте (развернуть/свернуть)
-        const mapWrapper = document.getElementById('mapWrapper');
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            
+            const mapWrapper = document.getElementById('mapWrapper');
+            mapWrapper.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+                if (mapInitialized) {
+                    setTimeout(() => {
+                        map.invalidateSize();
+                    }, 300);
+                }
+            });
+        });
 
-        mapWrapper.addEventListener('click', function() {
-            this.classList.toggle('expanded');
+        // ========== ЧАТ С ИИ ==========
+        const chatToggle = document.getElementById('chatToggle');
+        const chatWindow = document.getElementById('chatWindow');
+        const closeChatBtn = document.getElementById('closeChatBtn');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+        const chatMessages = document.getElementById('chatMessages');
 
-            if (!mapInitialized) {
-                initMap();
-            } else {
-                // Перерисовываем карту при изменении размера
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 300);
+        let isTyping = false;
+
+        function toggleChat() {
+            chatWindow.classList.toggle('hidden');
+        }
+
+        function closeChat() {
+            chatWindow.classList.add('hidden');
+        }
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas ${isUser ? 'fa-user' : 'fa-robot'}"></i>
+                </div>
+                <div class="message-content">${text}</div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            isTyping = true;
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                <div class="chat-typing">
+                    <span></span><span></span><span></span>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+            isTyping = false;
+        }
+
+        function getAIResponse(userMessage) {
+            const msg = userMessage.toLowerCase().trim();
+            
+            const responses = {
+                'привет': 'Привет! 👋 Чем могу помочь? Расскажу о доставке дронами, рассчитаю стоимость или помогу оформить заказ!',
+                'здравствуй': 'Здравствуйте! Рад вас видеть в SkySliceLogistX! 🚁',
+                'сколько стоит': 'Стоимость доставки рассчитывается индивидуально. Вы можете воспользоваться нашим калькулятором на сайте! Базовая ставка: 250₽ + 35₽/км + 20₽/кг (сверх 1 кг).',
+                'калькулятор': 'Калькулятор доставки находится в одноимённом разделе. Там можно указать вес, расстояние, время и погодные условия!',
+                'зоны покрытия': 'Мы доставляем в центр города, деловые кварталы, пригород до 20 км, индустриальные парки и портовые терминалы. Список хабов можно посмотреть на карте!',
+                'отзывы': 'Наши клиенты оценивают сервис на 4.8⭐. Более 10 000 довольных клиентов! Смотрите отзывы в карусели выше!',
+                'заказ': 'Чтобы оформить заказ, нажмите кнопку "Оставить заявку" на главной странице. Наш оператор свяжется с вами!'
+            };
+            
+            for (const [key, response] of Object.entries(responses)) {
+                if (msg.includes(key)) {
+                    return response;
+                }
+            }
+            
+            return 'Спасибо за вопрос! 🙏 Что именно вас интересует? Я могу рассказать о доставке, ценах или зонах покрытия.';
+        }
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            addMessage(message, true);
+            chatInput.value = '';
+            
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = getAIResponse(message);
+                addMessage(response, false);
+            }, 500 + Math.random() * 700);
+        }
+
+        chatToggle.addEventListener('click', toggleChat);
+        closeChatBtn.addEventListener('click', closeChat);
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        document.querySelectorAll('.suggestion-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const suggestion = chip.dataset.suggestion;
+                if (suggestion) {
+                    chatInput.value = suggestion;
+                    sendMessage();
+                }
+            });
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!chatWindow.contains(e.target) && !chatToggle.contains(e.target) && !chatWindow.classList.contains('hidden')) {
+                closeChat();
             }
         });
-
-        // Инициализация карты после загрузки страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            // Карта инициализируется при первом клике
-        });
-
-        // Если пользователь на мобильном устройстве - автоматически инициализируем
-        if (window.innerWidth < 768) {
-            setTimeout(() => {
-                initMap();
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 500);
-            }, 1000);
-        }
     </script>
 </body>
 </html>
